@@ -1,8 +1,8 @@
-﻿using DisciplinePicker.Core;
+﻿using RelationsPlatform.Core;
 
 using System;
 
-namespace DisciplinePicker.Infrastructure
+namespace RelationsPlatform.Infrastructure
 {
     public class RootDirectoryProvider : IRootDirectoryProvider
     {

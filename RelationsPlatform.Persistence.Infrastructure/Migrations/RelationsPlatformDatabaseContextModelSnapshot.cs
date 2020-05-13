@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace RelationsPlatform.Persistence.Infrastructure.Migrations
 {
     [DbContext(typeof(RelationsPlatformDataBaseContext))]
-    partial class DisciplinePickerDatabaseContextModelSnapshot : ModelSnapshot
+    partial class RelationsPlatformDatabaseContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

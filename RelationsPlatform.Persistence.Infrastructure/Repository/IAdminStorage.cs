@@ -1,12 +1,12 @@
-﻿using DisciplinePicker.Persistence.Model;
+﻿using RelationsPlatform.Persistence.Model;
 
 using System.Threading.Tasks;
 
-namespace DisciplinePicker.Persistence.Infrastructure.Repository
+namespace RelationsPlatform.Persistence.Infrastructure.Repository
 {
     public interface IAdminStorage
     {
-        Task<Student> GetAdmin();
-        Task EditAdminData(string login, string password);
+        //Task<Student> GetAdmin();
+        //Task EditAdminData(string login, string password);
     }
 }

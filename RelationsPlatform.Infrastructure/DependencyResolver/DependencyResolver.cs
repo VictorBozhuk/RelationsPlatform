@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Reflection;
 
-namespace DisciplinePicker.Infrastructure.DependencyResolver
+namespace RelationsPlatform.Infrastructure.DependencyResolver
 {
     public class DependencyResolver
     {
@@ -19,32 +19,19 @@ namespace DisciplinePicker.Infrastructure.DependencyResolver
             services.AddTransient<IRootDirectoryProvider, RootDirectoryProvider>();
             services.AddTransient<IConfigurationService, ConfigurationService>();
 
-            services.AddDbContext<DisciplinePickerDatabaseContext>(optionsAction: (provider, optionsBuilder) => ConfigureSqlServer(provider, optionsBuilder));
+            services.AddDbContext<RelationsPlatformDataBaseContext>(optionsAction: (provider, optionsBuilder) => ConfigureSqlServer(provider, optionsBuilder));
 
-            services.AddTransient<IStudentStorage, StudentStorage>();
+            // підключити сюда сервіси
             services.AddTransient<IAdminStorage, AdminStorage>();
-            services.AddTransient<IDisciplineStorage, DisciplineStorage>();
-            services.AddTransient<ILecturerStorage, LecturerStorage>();
-            services.AddTransient<IDisciplineChoiseStorage, DisciplineChoiseStorage>();
-            services.AddTransient<IDisciplineAvailabilityStorage, DisciplineAvailabilityStorage>();
         }
 
         private static void ConfigureSqlServer(IServiceProvider provider, DbContextOptionsBuilder optionsBuilder)
         {
             var configurationService = provider.GetService<IConfigurationService>();
             var connectionString = configurationService.GetConfiguration()
-                                   .GetConnectionString(nameof(DisciplinePickerDatabaseContext));
+                                   .GetConnectionString(nameof(RelationsPlatformDataBaseContext));
 
-            optionsBuilder.UseSqlServer(connectionString, builder => builder.MigrationsAssembly(Assembly.GetAssembly(typeof(DisciplinePickerDatabaseContext)).GetName().Name));
-        }
-
-        private static void ConfigurePostgresDb(IServiceProvider provider, DbContextOptionsBuilder optionsBuilder)
-        {
-            var configurationService = provider.GetService<IConfigurationService>();
-            var connectionString = configurationService.GetConfiguration()
-                                   .GetConnectionString(nameof(DisciplinePickerDatabaseContext));
-
-            optionsBuilder.UseNpgsql(connectionString, builder => builder.MigrationsAssembly(Assembly.GetAssembly(typeof(DisciplinePickerDatabaseContext)).GetName().Name));
+            optionsBuilder.UseSqlServer(connectionString, builder => builder.MigrationsAssembly(Assembly.GetAssembly(typeof(RelationsPlatformDataBaseContext)).GetName().Name));
         }
     }
 }

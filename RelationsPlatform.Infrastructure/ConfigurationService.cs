@@ -1,8 +1,8 @@
-﻿using DisciplinePicker.Core;
+﻿using RelationsPlatform.Core;
 
 using Microsoft.Extensions.Configuration;
 
-namespace DisciplinePicker.Infrastructure
+namespace RelationsPlatform.Infrastructure
 {
     public class ConfigurationService : IConfigurationService
     {
