@@ -1,18 +1,18 @@
-﻿using DisciplinePicker.Persistence.Model;
+﻿using RelationsPlatform.Persistence.Model;
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace DisciplinePicker.Persistence.Infrastructure.Repository
+namespace RelationsPlatform.Persistence.Infrastructure.Repository
 {
     public interface IDisciplineAvailabilityStorage
     {
-        Task<DisciplineAvailability> GetAvailability(string availabilityId);
-        Task EditAvailability(string availabilityId, NewAvailabilityArgs args);
-        Task AddNewAvailability(NewAvailabilityArgs args);
-        Task DeleteAvailability(string availabilityId);
-        Task<List<DisciplineAvailability>> GetFilledDisciplineAvailabilities();
-        Task<List<DisciplineAvailability>> GetFilledDisciplineAvailabilitiesOfStudents(string studentId);
+        //Task<DisciplineAvailability> GetAvailability(string availabilityId);
+        //Task EditAvailability(string availabilityId, NewAvailabilityArgs args);
+        //Task AddNewAvailability(NewAvailabilityArgs args);
+        //Task DeleteAvailability(string availabilityId);
+        //Task<List<DisciplineAvailability>> GetFilledDisciplineAvailabilities();
+        //Task<List<DisciplineAvailability>> GetFilledDisciplineAvailabilitiesOfStudents(string studentId);
     }
 
     public class NewAvailabilityArgs

@@ -1,19 +1,19 @@
-﻿using DisciplinePicker.Persistence.Model;
+﻿using RelationsPlatform.Persistence.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DisciplinePicker.Persistence.Infrastructure.Repository
+namespace RelationsPlatform.Persistence.Infrastructure.Repository
 {
     public interface IStudentStorage
     {
-        Task<Student> GetStudent(string studentId);
-        Task<Student> GetStudentByLogin(string login);
-        Task AddNewStudent(AddNewStudentArgs args);
-        Task EditStudent(string studentId, AddNewStudentArgs args);
-        Task DeleteStudent(string studentId);
-        Task ChangeStudentsPassword(string studentId, string newPassword);
+        //Task<Student> GetStudent(string studentId);
+        //Task<Student> GetStudentByLogin(string login);
+        //Task AddNewStudent(AddNewStudentArgs args);
+        //Task EditStudent(string studentId, AddNewStudentArgs args);
+        //Task DeleteStudent(string studentId);
+        //Task ChangeStudentsPassword(string studentId, string newPassword);
     }
 
     public class AddNewStudentArgs
