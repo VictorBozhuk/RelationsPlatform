@@ -1,6 +1,6 @@
 using System;
 
-namespace RelationsPlatform.Models
+namespace RelationsPlatform.Web.Models
 {
     public class ErrorViewModel
     {

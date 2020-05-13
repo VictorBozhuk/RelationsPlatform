@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using RelationsPlatform.Models;
+using RelationsPlatform.Web.Models;
 
-namespace RelationsPlatform.Controllers
+namespace RelationsPlatform.Web.Controllers
 {
     public class HomeController : Controller
     {

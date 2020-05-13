@@ -25,7 +25,7 @@ namespace RelationsPlatform.Persistence.Infrastructure
             // Get connection string
             var optionsBuilder = new DbContextOptionsBuilder<RelationsPlatformDataBaseContext>();
             var connectionString = config.GetConnectionString(nameof(RelationsPlatformDataBaseContext));
-            optionsBuilder.UseSqlServer(connectionString, b => b.MigrationsAssembly(Assembly.GetAssembly(typeof(DisciplinePickerDatabaseContext)).GetName().Name));
+            optionsBuilder.UseSqlServer(connectionString, b => b.MigrationsAssembly(Assembly.GetAssembly(typeof(RelationsPlatformDataBaseContext)).GetName().Name));
             return new RelationsPlatformDataBaseContext(optionsBuilder.Options);
         }
     }
