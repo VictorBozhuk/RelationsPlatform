@@ -5,11 +5,11 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Reflection;
 
-namespace DisciplinePicker.Persistence.Infrastructure
+namespace RelationsPlatform.Persistence.Infrastructure
 {
-    public class DisciplinePickerDbContextFactory : IDesignTimeDbContextFactory<DisciplinePickerDatabaseContext>
+    public class RelationsPlatformDbContextFactory : IDesignTimeDbContextFactory<RelationsPlatformDataBaseContext>
     {
-        public DisciplinePickerDatabaseContext CreateDbContext(string[] args)
+        public RelationsPlatformDataBaseContext CreateDbContext(string[] args)
         {
             // Get environment
             string environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
@@ -23,10 +23,10 @@ namespace DisciplinePicker.Persistence.Infrastructure
                 .Build();
 
             // Get connection string
-            var optionsBuilder = new DbContextOptionsBuilder<DisciplinePickerDatabaseContext>();
-            var connectionString = config.GetConnectionString(nameof(DisciplinePickerDatabaseContext));
+            var optionsBuilder = new DbContextOptionsBuilder<RelationsPlatformDataBaseContext>();
+            var connectionString = config.GetConnectionString(nameof(RelationsPlatformDataBaseContext));
             optionsBuilder.UseSqlServer(connectionString, b => b.MigrationsAssembly(Assembly.GetAssembly(typeof(DisciplinePickerDatabaseContext)).GetName().Name));
-            return new DisciplinePickerDatabaseContext(optionsBuilder.Options);
+            return new RelationsPlatformDataBaseContext(optionsBuilder.Options);
         }
     }
 }

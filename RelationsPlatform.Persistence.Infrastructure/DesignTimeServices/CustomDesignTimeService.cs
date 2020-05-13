@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DisciplinePicker.Persistence.Infrastructure
+namespace RelationsPlatform.Persistence.Infrastructure
 {
     public class CustomDesignTimeService : IDesignTimeServices
     {

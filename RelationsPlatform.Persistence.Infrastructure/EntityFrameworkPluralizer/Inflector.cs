@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace DisciplinePicker.Persistence.Infrastructure
+namespace RelationsPlatform.Persistence.Infrastructure
 {
     public static class Inflector
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Design;
 
-namespace DisciplinePicker.Persistence.Infrastructure
+namespace RelationsPlatform.Persistence.Infrastructure
 {
     public class CustomPluralizer : IPluralizer
     {
