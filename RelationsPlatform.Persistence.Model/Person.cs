@@ -13,7 +13,7 @@ namespace RelationsPlatform.Persistence.Model
         public byte[] Avatar { get; set; }
 
         public virtual DateTime? UpdateTime { get; set; }
-        public virtual Contacts Contact { get; set; }
+        public virtual Contact Contact { get; set; }
         public virtual DateTime? Birthday { get; set; }
         public virtual Skill Skill { get; set; }
         public virtual Education Education { get; set; }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace RelationsPlatform.Persistence.Model
 {
-    public class Contacts
+    public class Contact
     {
         public Guid Id { get; set; }
         public string Telegram { get; set; }
@@ -16,7 +16,7 @@ namespace RelationsPlatform.Persistence.Model
         public virtual Address Address { get; set; }
         public virtual ICollection<string> NumberPhones { get; set; }
 
-        public Contacts()
+        public Contact()
         {
             NumberPhones = new HashSet<string>();
         }

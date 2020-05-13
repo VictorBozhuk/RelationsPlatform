@@ -11,6 +11,6 @@ namespace RelationsPlatform.Persistence.Model
         public string Street { get; set; }
         public string NumberOfHouse { get; set; }
         public string ApartmentNumber { get; set; } = null;
-        public virtual Contacts Contacts { get; set; }
+        public virtual Contact Contacts { get; set; }
     }
 }
