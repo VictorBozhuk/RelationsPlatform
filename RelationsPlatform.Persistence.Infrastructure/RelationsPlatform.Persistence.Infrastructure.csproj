@@ -37,7 +37,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RelationsPlatform.Persistence.Model\RelationsPlatform.Persistence.Model.csproj" />
-    <ProjectReference Include="..\RelationsPlatform.Web\RelationsPlatform.Web.csproj" />
   </ItemGroup>
 
 </Project>
