@@ -26,7 +26,10 @@ namespace RelationsPlatform.Web.Controllers
             _accountStorage = accountStorage;
         }
 
-        public IActionResult Index() => View();
+        public IActionResult Index(string returnUrl = null)
+        {
+            return View(new LoginViewModel { ReturnUrl = returnUrl });
+        }
 
         [HttpGet]
         public IActionResult Login(string returnUrl = null)
