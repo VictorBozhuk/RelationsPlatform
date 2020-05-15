@@ -23,13 +23,14 @@ namespace RelationsPlatform.Infrastructure.DependencyResolver
 
             // підключити сюда сервіси
             services.AddTransient<IAdminStorage, AdminStorage>();
+            services.AddTransient<IAccountStorage, AccountStorage>();
+            services.AddTransient<IUserStorage, UserStorage>();
         }
 
         private static void ConfigureSqlServer(IServiceProvider provider, DbContextOptionsBuilder optionsBuilder)
         {
             var configurationService = provider.GetService<IConfigurationService>();
-            var connectionString = configurationService.GetConfiguration()
-                                   .GetConnectionString(nameof(RelationsPlatformDataBaseContext));
+            var connectionString = configurationService.GetConfiguration().GetConnectionString(nameof(RelationsPlatformDataBaseContext));
 
             optionsBuilder.UseSqlServer(connectionString, builder => builder.MigrationsAssembly(Assembly.GetAssembly(typeof(RelationsPlatformDataBaseContext)).GetName().Name));
         }

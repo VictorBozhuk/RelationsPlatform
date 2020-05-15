@@ -39,4 +39,8 @@
     <ProjectReference Include="..\RelationsPlatform.Persistence.Model\RelationsPlatform.Persistence.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

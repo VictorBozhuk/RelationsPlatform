@@ -6,7 +6,8 @@ namespace RelationsPlatform.Persistence.Model
     public class Skill
     {
         public Guid Id { get; set; }
-        public virtual Person Person { get; set; }
+        public Guid UserId { get; set; }
+        public virtual User User { get; set; }
         public virtual ICollection<Job> Jobs { get; set; }
         public virtual ICollection<ProfessionalSkill> ProfesionSkills { get; set; }
         public virtual ICollection<Ability> Abilities { get; set; }

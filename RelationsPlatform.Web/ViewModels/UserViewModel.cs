@@ -1,11 +1,15 @@
-﻿using System;
+﻿using RelationsPlatform.Persistence.Model;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace RelationsPlatform.Persistence.Model
+namespace RelationsPlatform.Web.ViewModels
 {
-    public class Person
+    public class UserViewModel
     {
         public Guid Id { get; set; }
+        public string Login { get; set; }
         public string Name { get; set; }
         public string Sex { get; set; }
         public string Description { get; set; }
@@ -18,10 +22,5 @@ namespace RelationsPlatform.Persistence.Model
         public virtual Skill Skill { get; set; }
         public virtual Education Education { get; set; }
         public virtual ICollection<Relation> Relations { get; set; }
-
-        public Person()
-        {
-            Relations = new HashSet<Relation>();
-        }
     }
 }

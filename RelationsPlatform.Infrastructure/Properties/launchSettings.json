@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "RelationsPlatform.Infrastructure": {
+      "commandName": "Project"
+    }
+  }
+}
