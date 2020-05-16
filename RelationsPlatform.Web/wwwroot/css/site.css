@@ -26,6 +26,16 @@ html {
     background-color: #f7f7f7;
 }*/
 
+/*body {
+    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+}*/
+
+body {
+    background-color: #222534 /*#6F6349*/;
+    /*font-family: 'Shadows Into Light', cursive;*/
+    font-size: 16px;
+}
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -53,6 +63,14 @@ html {
 button.accept-policy {
   font-size: 1rem;
   line-height: inherit;
+}
+
+.transButton {
+    background-image: none;
+    background-color: transparent;
+    color: white;
+    margin-top: 8px;
+    border: hidden;
 }
 
 
