@@ -33,5 +33,16 @@ namespace RelationsPlatform.Web.Controllers
 
             return View(userViewModel);
         }
+
+        public async Task<IActionResult> EditUser()
+        {
+            var user = await _userStorage.GetUser(User.Identity.Name);
+            var userViewModel = new UserViewModel()
+            {
+                Name = user.Name,
+            };
+
+            return View(userViewModel);
+        }
     }
 }

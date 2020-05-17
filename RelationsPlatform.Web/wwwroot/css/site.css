@@ -73,4 +73,12 @@ button.accept-policy {
     border: hidden;
 }
 
+.othertop {
+    margin-top: 10px;
+}
 
+img {
+    max-width: 100px;
+    height: 100px;
+    margin-top: 20px;
+}
