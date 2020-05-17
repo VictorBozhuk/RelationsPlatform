@@ -9,9 +9,9 @@ namespace RelationsPlatform.Persistence.Model
         public string Country { get; set; }
         public string Region { get; set; }
         public string City { get; set; }
+        public string District { get; set; }
         public string Street { get; set; }
         public string NumberOfHouse { get; set; }
-        public string ApartmentNumber { get; set; } = null;
         public virtual Contact Contact { get; set; }
     }
 }

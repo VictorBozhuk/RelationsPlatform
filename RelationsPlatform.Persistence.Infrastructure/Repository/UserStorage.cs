@@ -18,7 +18,102 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
 
         public async Task<User> GetUser(string login)
         {
-            return await _context.Users.Include(x => x.Role).FirstOrDefaultAsync(u => u.Login == login);
+            return await _context.Users.Include(x => x.Role).Include(x => x.Contact).ThenInclude(x => x.Address).FirstOrDefaultAsync(u => u.Login == login);
+        }
+
+        public async Task<Contact> GetContact(string userId)
+        {
+            return await _context.Contacts.Include(x => x.Address).FirstOrDefaultAsync(x => x.UserId.ToString() == userId);
+        }
+
+        public async Task<Address> GetAddress(string contactId)
+        {
+            return await _context.Addresses.FirstOrDefaultAsync(x => x.ContactId.ToString() == contactId);
+        }
+
+        public async Task AddContact(Guid userId, string instagram, string telegram, string facebook, string email, string discord)
+        {
+            var contact = new Contact()
+            {
+                UserId = userId,
+                Instagram = instagram,
+                Telegram = telegram,
+                Facebook = facebook,
+                Email = email,
+                Discord = discord,
+            };
+
+            await _context.Contacts.AddAsync(contact);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddAddress(Guid contactId, string country, string region, string city, string district, string street, string numberOfHouse)
+        {
+            var address = new Address()
+            {
+                Country = country,
+                Region = region,
+                City = city,
+                District = district,
+                Street = street,
+                NumberOfHouse = numberOfHouse,
+                ContactId = contactId,
+            };
+
+            await _context.Addresses.AddAsync(address);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task EditUser(UserArgs args)
+        {
+            if (args == null)
+            {
+                throw new ArgumentNullException(nameof(args));
+            }
+
+            var user = await GetUser(args.Login);
+
+            if(user != null)
+            {
+                user.Login = args.Login;
+                user.Name = args.Name;
+                user.Password = args.Password;
+                user.Birthday = Convert.ToDateTime(args.Birthday);
+                user.Description = args.Description;
+                user.DigitalName = args.DigitalName;
+                user.Gender = args.Gender;
+
+                var contact = await GetContact(user.Id.ToString());
+                if(contact != null)
+                {
+                    contact.Discord = args.Contact.Discord;
+                    contact.Instagram = args.Contact.Instagram;
+                    contact.Facebook = args.Contact.Facebook;
+                    contact.Email = args.Contact.Email;
+                    contact.Telegram = args.Contact.Telegram;
+
+                    var address = await GetAddress(contact.Id.ToString());
+                    if(address != null)
+                    {
+                        address.Country = args.Contact.Address.Country;
+                        address.Region = args.Contact.Address.Region;
+                        address.City = args.Contact.Address.City;
+                        address.Street = args.Contact.Address.Street;
+                        address.NumberOfHouse = args.Contact.Address.NumberOfHouse;
+                    }
+                    else
+                    {
+                        await AddAddress(contact.Id, args.Contact.Address.Country, args.Contact.Address.Region, args.Contact.Address.City, 
+                            args.Contact.Address.District, args.Contact.Address.Street, args.Contact.Address.NumberOfHouse);
+                    }
+                }
+                else
+                {
+                    await AddContact(user.Id, args.Contact.Instagram, args.Contact.Telegram, args.Contact.Facebook, args.Contact.Email, args.Contact.Discord);
+                }
+
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

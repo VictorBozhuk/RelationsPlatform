@@ -7,7 +7,7 @@
 <div class="container emp-profile">
     <div class="row">
         <div class="col-md-10 ">
-            <form class="form-horizontal">
+            <form class="form-horizontal" asp-action="EditUser">
                 <fieldset>
                     <!-- Form Name -->
                     <legend>User profile form requirement</legend>
@@ -25,6 +25,18 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-md-4 col-form-label text-md-right">Login</label>
+                        <div class="col-md-4">
+                            <input type="text" asp-for="Login" class="form-control" placeholder="Login">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label text-md-right">Password</label>
+                        <div class="col-md-4">
+                            <input type="text" asp-for="Password" class="form-control" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-md-4 col-form-label text-md-right">Digital name</label>
                         <div class="col-md-4">
                             <input type="text" asp-for="DigitalName" class="form-control" placeholder="Disgital name">
@@ -37,22 +49,26 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-4 col-form-label text-md-right">Birthday</label>
-                        <div class="col-md-4">
-                            <input type="text" asp-for="Birthday" class="form-control" placeholder="YYYY-MM-DD">
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <label class="col-md-4 col-form-label text-md-right">Gender</label>
                         <div class="col-md-4">
-                            <label class="radio-inline" asp-for="Gender">
-                                <input type="radio" name="Gender" id="Gender-0" value="Male" checked="checked">
-                                Male
-                            </label>
-                            <label class="radio-inline" asp-for="Gender">
-                                <input type="radio" name="Gender" id="Gender-1" value="Female">
-                                Female
-                            </label>
+                            @if (@Model.Gender == "Male")
+                            {
+                                <label class="radio-inline" asp-for="Gender">
+                                    <input type="radio" name="Gender" id="Gender-0" value="Male" checked="checked">Male
+                                </label>
+                                <label class="radio-inline" asp-for="Gender">
+                                    <input type="radio" name="Gender" id="Gender-1" value="Female">Female
+                                </label>
+                            }
+                            else
+                            {
+                                <label class="radio-inline" asp-for="Gender">
+                                    <input type="radio" name="Gender" id="Gender-0" value="Male">Male
+                                </label>
+                                <label class="radio-inline" asp-for="Gender">
+                                    <input type="radio" name="Gender" id="Gender-1" value="Female" checked="checked">Female
+                                </label>
+                            }
                         </div>
                     </div>
                     <div class="form-group row">
@@ -66,31 +82,31 @@
                     <div class="form-group row">
                         <label class="col-md-4 col-form-label text-md-right">Instagram</label>
                         <div class="col-md-4">
-                            <input type="text" asp-for="Contact.Instagram" class="form-control" placeholder="Instagram">
+                            <input type="text" asp-for="Instagram" class="form-control" placeholder="Instagram">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-4 col-form-label text-md-right">Telegram</label>
                         <div class="col-md-4">
-                            <input type="text" asp-for="Contact.Telegram" class="form-control" placeholder="Telegram">
+                            <input type="text" asp-for="Telegram" class="form-control" placeholder="Telegram">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-4 col-form-label text-md-right">Facebook</label>
                         <div class="col-md-4">
-                            <input type="text" asp-for="Contact.Facebook" class="form-control" placeholder="Facebook">
+                            <input type="text" asp-for="Facebook" class="form-control" placeholder="Facebook">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-4 col-form-label text-md-right">Email</label>
                         <div class="col-md-4">
-                            <input type="text" asp-for="Contact.Email" class="form-control" placeholder="Email">
+                            <input type="text" asp-for="Email" class="form-control" placeholder="Email">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-4 col-form-label text-md-right">Discord</label>
                         <div class="col-md-4">
-                            <input type="text" asp-for="Contact.Discord" class="form-control" placeholder="Discord">
+                            <input type="text" asp-for="Discord" class="form-control" placeholder="Discord">
                         </div>
                     </div>
                     <legend>Address</legend>
@@ -98,40 +114,49 @@
                     <div class="form-group row">
                         <label class="col-md-4 col-form-label text-md-right">Country</label>
                         <div class="col-md-4">
-                            <input type="text" asp-for="Contact.Address.Country" class="form-control" placeholder="Country">
+                            <input type="text" asp-for="Country" class="form-control" placeholder="Country">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-4 col-form-label text-md-right">Region</label>
                         <div class="col-md-4">
-                            <input type="text" asp-for="Contact.Address.Region" class="form-control" placeholder="Region">
+                            <input type="text" asp-for="Region" class="form-control" placeholder="Region">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-4 col-form-label text-md-right">City</label>
                         <div class="col-md-4">
-                            <input type="text" asp-for="Contact.Address.City" class="form-control" placeholder="City">
+                            <input type="text" asp-for="City" class="form-control" placeholder="City">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label text-md-right">District</label>
+                        <div class="col-md-4">
+                            <input type="text" asp-for="District" class="form-control" placeholder="District">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-4 col-form-label text-md-right">Street</label>
                         <div class="col-md-4">
-                            <input type="text" asp-for="Contact.Address.Street" class="form-control" placeholder="Street">
+                            <input type="text" asp-for="Street" class="form-control" placeholder="Street">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-4 col-form-label text-md-right">Number of house</label>
                         <div class="col-md-4">
-                            <input type="text" asp-for="Contact.Address.NumberOfHouse" class="form-control" placeholder="Number of house">
+                            <input type="text" asp-for="NumberOfHouse" class="form-control" placeholder="Number of house">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-md-4 control-label"></label>
+                    <div class="form-group row">
                         <div class="col-md-4">
-                            <a href="#" class="btn btn-danger">Cancel</a>
-                            <div class="col-md-4">
-                                <a href="#" class="btn btn-success" value="">save</a>
+                            <div class="row justify-content-end">
+                                <div class="col-md-4">
+                                    <a asp-action="Index" class="btn btn-danger">Cancel</a>
+                                </div>
                             </div>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-success" value="">save</button>
                         </div>
                     </div>
                 </fieldset>
