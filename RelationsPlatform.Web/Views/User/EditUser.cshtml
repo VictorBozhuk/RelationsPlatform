@@ -7,7 +7,7 @@
 <div class="container emp-profile">
     <div class="row">
         <div class="col-md-10 ">
-            <form class="form-horizontal" asp-action="EditUser">
+            <form class="form-horizontal" asp-action="EditUser" enctype="multipart/form-data">
                 <fieldset>
                     <!-- Form Name -->
                     <legend>User profile form requirement</legend>
@@ -15,7 +15,7 @@
                     <div class="form-group row">
                         <label class="col-md-4 col-form-label text-md-right">Photo</label>
                         <div class="col-md-4">
-                            <input type='file' onchange="readURL(this);" />
+                            <input type='file' asp-for="File" onchange="readURL(this);" />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -149,6 +149,13 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4">
+                            <a class="btn btn-primary" style="width:150px;" value="">Advanced</a>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4">
                             <div class="row justify-content-end">
                                 <div class="col-md-4">
                                     <a asp-action="Index" class="btn btn-danger">Cancel</a>
@@ -163,7 +170,14 @@
             </form>
         </div>
         <div class="col-md-2 hidden-xs">
-            <img id="blah" alt="your image" src="~/img/ava.png" class="img-responsive img-thumbnail ">
+            @if (Model.Avatar == null)
+            {
+                <img id="blah" alt="your image" src="~/img/ava.png" class="img-responsive img-thumbnail imgAva">
+            }
+            else
+            {
+                <img id="blah" alt="your image" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Avatar)" class="img-responsive img-thumbnail imgAva">
+            }
         </div>
     </div>
 </div>

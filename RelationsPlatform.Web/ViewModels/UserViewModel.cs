@@ -1,4 +1,5 @@
-﻿using RelationsPlatform.Persistence.Model;
+﻿using Microsoft.AspNetCore.Http;
+using RelationsPlatform.Persistence.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace RelationsPlatform.Web.ViewModels
         public string Description { get; set; }
         public string DigitalName { get; set; }
         public string Birthday { get; set; }
+        public IFormFile File { get; set; }
         public byte[] Avatar { get; set; }
 
         public string Telegram { get; set; }

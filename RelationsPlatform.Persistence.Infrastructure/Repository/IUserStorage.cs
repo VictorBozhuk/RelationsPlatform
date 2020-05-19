@@ -9,6 +9,7 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
     public interface IUserStorage
     {
         Task<User> GetUser(string login);
+        Task<List<User>> GetUsers();
         Task EditUser(UserArgs args);
         Task<Contact> GetContact(string userId);
         Task<Address> GetAddress(string contactId);

@@ -11,6 +11,8 @@ using RelationsPlatform.Persistence.Infrastructure;
 using RelationsPlatform.Persistence.Infrastructure.Repository;
 using RelationsPlatform.Persistence.Model;
 using RelationsPlatform.Web.ViewModels;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace RelationsPlatform.Web.Controllers
 {
@@ -46,6 +48,7 @@ namespace RelationsPlatform.Web.Controllers
                 Login = user.Login,
                 Password = user.Password,
                 DigitalName = user.DigitalName,
+                Avatar = user.Avatar,
             };
 
             if(user.Contact != null)
@@ -73,6 +76,11 @@ namespace RelationsPlatform.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> EditUser(UserViewModel model)
         {
+            using (var ms = new MemoryStream())
+            {
+                model.File.CopyTo(ms);
+                model.Avatar = ms.ToArray();
+            }
             var address = new Address()
             {
                 Country = model.Country,
@@ -95,6 +103,7 @@ namespace RelationsPlatform.Web.Controllers
 
             var args = new UserArgs()
             {
+                Avatar = model.Avatar,
                 Birthday = model.Birthday,
                 Description = model.Description,
                 DigitalName = model.DigitalName,
@@ -109,5 +118,16 @@ namespace RelationsPlatform.Web.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> Relations()
+        {
+            RelationsViewModel model = new RelationsViewModel()
+            {
+                Users = await _userStorage.GetUsers(),
+            };
+
+            return View(model);
+        }
+
     }
 }

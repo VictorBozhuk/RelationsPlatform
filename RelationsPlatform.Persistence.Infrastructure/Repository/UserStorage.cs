@@ -2,6 +2,8 @@
 using RelationsPlatform.Persistence.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,7 +20,16 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
 
         public async Task<User> GetUser(string login)
         {
-            return await _context.Users.Include(x => x.Role).Include(x => x.Contact).ThenInclude(x => x.Address).FirstOrDefaultAsync(u => u.Login == login);
+            return await _context.Users.Include(x => x.Role).Include(x => x.Contact).ThenInclude(x => x.Address)
+                .Include(x => x.Skill).ThenInclude(x => x.Abilities).Include(x => x.Skill).ThenInclude(x => x.Jobs)
+                .Include(x => x.Skill).ThenInclude(x => x.ProfesionSkills).Include(x => x.Education).ThenInclude(x => x.Courses)
+                .Include(x => x.Education).ThenInclude(x => x.HigherEducations).Include(x => x.Education).ThenInclude(x => x.Schools)
+                .FirstOrDefaultAsync(u => u.Login == login);
+        }
+
+        public async Task<List<User>> GetUsers()
+        {
+            return await _context.Users.Include(x => x.Role).Include(x => x.Contact).ThenInclude(x => x.Address).Include(x => x.Skill).Where(x => x.Role.Name == "user").ToListAsync();
         }
 
         public async Task<Contact> GetContact(string userId)
@@ -82,6 +93,7 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
                 user.Description = args.Description;
                 user.DigitalName = args.DigitalName;
                 user.Gender = args.Gender;
+                user.Avatar = args.Avatar;
 
                 var contact = await GetContact(user.Id.ToString());
                 if(contact != null)

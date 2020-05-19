@@ -1,0 +1,41 @@
+﻿@model RelationsPlatform.Web.ViewModels.RelationsViewModel
+
+@{
+    ViewData["Title"] = "Relations";
+}
+
+<div class="container emp-profile">
+    <form method="post">
+            @foreach (var user in Model.Users)
+            {
+                <div class="relationRow">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="row">
+                                <img src="~/img/ava.png" class="img-responsive" />
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4>@user.Name</h4>
+                                    <hr />
+                                </div>
+
+                                <div class="col-md-3">
+                                    <p>Profession</p>
+                                    <p>Birthday</p>
+                                    <p>City</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>@user.Skill.MainProfession</p>
+                                    <p>@user.Birthday.GetValueOrDefault().ToShortDateString()</p>
+                                    <p>@user.Contact.Address.City</p>
+                                </div>
+                            </div>
+                        </div><!--profile-head close-->
+                    </div>
+                </div>
+            }
+</form>
+</div>
