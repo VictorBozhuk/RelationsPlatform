@@ -1,23 +1,4 @@
-﻿.tooltp {
-    position: absolute;
-    background: pink;
-    width: 0px;
-    right: 60px;
-    padding: 10px 0px;
-    margin: -5px;
-    -webkit-transition: width 2s; /* For Safari 3.1 to 6.0 */
-    transition: width 2s;
-    overflow: hidden;
-}
-
-.lnk_usr:hover .tooltp {
-    overflow: hidden;
-    display: block;
-    right: 60px;
-    width: 100px;
-}
-
-.relationRow {
+﻿.relationRow {
     padding: 15px;
     margin: 5px auto;
     border-radius: 0.3em;
