@@ -138,6 +138,21 @@ namespace RelationsPlatform.Web.Controllers
             return RedirectToAction("ProfessionSkills");
         }
 
+        public async Task<IActionResult> AddSchool(SchoolsViewModel model)
+        {
+            var user = await _userStorage.GetUser(User.Identity.Name);
+            var education = await _educationStorage.GetEducation(user.Id.ToString());
+            var school = new SchoolArgs()
+            {
+                Name = model.Name,
+                Description = model.Description,
+                EducationId = education.Id,
+            };
+            await _schoolStorage.AddSchool(school);
+
+            return RedirectToAction("Courses");
+        }
+
         public async Task<IActionResult> Courses()
         {
             var user = await _userStorage.GetUser(User.Identity.Name);
@@ -310,6 +325,13 @@ namespace RelationsPlatform.Web.Controllers
             return RedirectToAction("ProfessionSkills");
         }
 
+        public async Task<IActionResult> DeleteSchool(string id)
+        {
+            await _schoolStorage.DeleteSchool(id);
+
+            return RedirectToAction("Schools");
+        }
+
         public async Task<IActionResult> ProfessionSkills()
         {
             var user = await _userStorage.GetUser(User.Identity.Name);
@@ -320,6 +342,17 @@ namespace RelationsPlatform.Web.Controllers
             };
 
             return View(skills);
+        }
+
+        public async Task<IActionResult> Schools()
+        {
+            var user = await _userStorage.GetUser(User.Identity.Name);
+            var schools = new SchoolsViewModel()
+            {
+                Schools = user.Education.Schools.ToList(),
+            };
+
+            return View(schools);
         }
     }
 }
