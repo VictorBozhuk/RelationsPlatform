@@ -1,0 +1,59 @@
+﻿@model RelationsPlatform.Web.ViewModels.ProfessionSkillsViewModel
+
+@{
+    ViewData["Title"] = "ProfSkills";
+    Layout = "~/Views/User/_Menu.cshtml";
+}
+
+<form class="inputForm" asp-action="AddProfSkill" method="get">
+    <div class="row align-items-center">
+        <div class="col-6">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Skill</label>
+                <div class="col-sm-9 ml-auto">
+                    <input type="text" asp-for="Name" class="form-control" placeholder="Skill">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Level</label>
+                <div class="col-sm-9 ml-auto">
+                    <input type="number" asp-for="Level" class="form-control" placeholder="Level">
+                </div>
+            </div>
+            <div class="form-group row justify-content-center">
+                <div class="col-sm-7 ml-auto">
+                    <input type="submit" value="Save" class="btn btn-sm btn-orange" style="width:100px;" />
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            @foreach (var item in Model.Levels)
+            {
+                <p>@item.Key: @item.Value</p>
+            }
+        </div>
+    </div>
+</form>
+
+
+    <div id="skillTable" class="container">
+        <ul id="skillTable">
+            <li id="skillTable" class="table-header">
+                <div id="skillTable" class="col-md-2">Skill</div>
+                <div id="skillTable" class="col-md-1">Level</div>
+                <div id="skillTable" class="col-md-7">Description</div>
+                <div id="skillTable" class="col-md-2"></div>
+            </li>
+            @foreach (var skill in Model.Skills)
+            {
+                <li id="skillTable" class="table-row">
+                    <div id="skillTable" class="col-md-2">@skill.Name</div>
+                    <div id="skillTable" class="col-md-1">@skill.Level</div>
+                    <div id="skillTable" class="col-md-7">@skill.Description</div>
+                    <div id="skillTable" class="col-md-2">
+                        <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>

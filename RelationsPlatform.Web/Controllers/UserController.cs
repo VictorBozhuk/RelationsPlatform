@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Security.Claims;
 
 using RelationsPlatform.Persistence.Infrastructure;
+using RelationsPlatform.Persistence.Infrastructure.Models;
 using RelationsPlatform.Persistence.Infrastructure.Repository;
 using RelationsPlatform.Persistence.Model;
 using RelationsPlatform.Web.ViewModels;
@@ -127,6 +128,31 @@ namespace RelationsPlatform.Web.Controllers
             };
 
             return View(model);
+        }
+
+        public async Task<IActionResult> ProfessionSkills()
+        {
+            var user = await _userStorage.GetUser(User.Identity.Name);
+            var skills = new ProfessionSkillsViewModel()
+            {
+                Levels = Level.Levels,
+                Skills = user.Skill.ProfesionSkills.ToList(),
+            };
+
+            return View(skills);
+        }
+
+        public async Task<IActionResult> AddProfSkill(ProfessionSkillsViewModel model)
+        {
+            var user = await _userStorage.GetUser(User.Identity.Name);
+            var skill = await
+            var skills = new ProfessionSkillsViewModel()
+            {
+                Levels = Level.Levels,
+                Skills = user.Skill.ProfesionSkills.ToList(),
+            };
+
+            return View(skills);
         }
 
     }

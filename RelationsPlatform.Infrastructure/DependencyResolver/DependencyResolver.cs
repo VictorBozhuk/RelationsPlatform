@@ -22,9 +22,17 @@ namespace RelationsPlatform.Infrastructure.DependencyResolver
             services.AddDbContext<RelationsPlatformDataBaseContext>(optionsAction: (provider, optionsBuilder) => ConfigureSqlServer(provider, optionsBuilder));
 
             // підключити сюда сервіси
-            services.AddTransient<IAdminStorage, AdminStorage>();
             services.AddTransient<IAccountStorage, AccountStorage>();
             services.AddTransient<IUserStorage, UserStorage>();
+            services.AddTransient<IAbilityStorage, AbilityStorage>();
+            services.AddTransient<IJobStorage, JobStorage>();
+            services.AddTransient<IProfessionSkillStorage, ProfessionSkillStorage>();
+            services.AddTransient<ISkillStorage, SkillStorage>();
+            services.AddTransient<IEducationStorage, EducationStorage>();
+            services.AddTransient<ISchoolStorage, SchoolStorage>();
+            services.AddTransient<ICourseStorage, ICourseStorage>();
+            services.AddTransient<IHigherEducationStorage, HigherEducationStorage>();
+            services.AddTransient<IRelationStorage, RelationStorage>();
         }
 
         private static void ConfigureSqlServer(IServiceProvider provider, DbContextOptionsBuilder optionsBuilder)

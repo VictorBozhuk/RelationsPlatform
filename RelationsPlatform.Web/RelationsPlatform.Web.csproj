@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RelationsPlatform.Infrastructure\RelationsPlatform.Infrastructure.csproj" />
+    <ProjectReference Include="..\RelationsPlatform.Persistence.Infrastructure\RelationsPlatform.Persistence.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

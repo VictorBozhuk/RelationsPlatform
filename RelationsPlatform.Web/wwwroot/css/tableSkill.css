@@ -1,0 +1,88 @@
+﻿/*body {
+    font-family: lato,sans-serif
+}*/
+
+/*.container#skillTable {
+    padding: 15px;
+    margin: 5px 0px 5px -5px;
+    border-radius: 0.3em;
+}*/
+
+/*.container#skillTable {
+    padding: 15px;
+    margin: 5px 0px;
+    border-radius: 0.3em;
+}*/
+
+ul#skillTable {
+    padding: 15px;
+    margin: 5px 15px;
+    border-radius: 0.3em;
+}
+
+.inputForm {
+    padding: 15px;
+    margin: 5px 50px;
+    border-radius: 0.3em;
+    background-color: #f2f2f2;
+}
+
+li#skillTable {
+    border-radius: 3px;
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px
+}
+
+.table-header#skillTable {
+    background-color: #95A5A6;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: .03em
+}
+
+.table-row#skillTable {
+    background-color: #fff;
+    box-shadow: 0 0 9px 0 rgba(0,0,0,.1)
+}
+
+.col-1#skillTable {
+    flex-basis: 35%
+}
+
+.col-2#skillTable {
+    flex-basis: 5%
+}
+
+.col-3#skillTable{
+    flex-basis: 50%
+}
+
+.col-4#skillTable {
+    flex-basis: 10%
+}
+
+@media all and (max-width:767px) {
+    .table-header#skillTable {
+        display: none
+    }
+
+    li#skillTable {
+        display: block
+    }
+
+    .col#skillTable {
+        flex-basis: 100%;
+        display: flex;
+        padding: 10px 0
+    }
+
+        .col:before#skillTable {
+            color: #6C7A89;
+            padding-right: 10px;
+            content: attr(data-label);
+            flex-basis: 50%;
+            text-align: center;
+        }
+}

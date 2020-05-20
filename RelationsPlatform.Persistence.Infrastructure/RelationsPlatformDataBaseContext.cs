@@ -170,7 +170,7 @@ namespace RelationsPlatform.Persistence.Infrastructure
             {
                 Id = new Guid("3cf9a078-fdff-4a49-b3f8-98e5fb704389"),
                 Name = "C#",
-                Description = Level.Level4,
+                Description = Level.Levels[3].Value,
                 Level = 4,
                 SkillId = skill1.Id,
             };
@@ -179,7 +179,7 @@ namespace RelationsPlatform.Persistence.Infrastructure
             {
                 Id = new Guid("f8cdc96a-b2a7-4486-bd22-681f64c47b23"),
                 Name = "WinForms",
-                Description = Level.Level2,
+                Description = Level.Levels[1].Value,
                 Level = 2,
                 SkillId = skill1.Id,
             };
@@ -188,7 +188,7 @@ namespace RelationsPlatform.Persistence.Infrastructure
             {
                 Id = new Guid("bcb4de5c-b017-4359-bc1d-e7cdd01c9004"),
                 Name = "WPF",
-                Description = Level.Level3,
+                Description = Level.Levels[2].Value,
                 Level = 3,
                 SkillId = skill1.Id,
             };
@@ -197,7 +197,7 @@ namespace RelationsPlatform.Persistence.Infrastructure
             {
                 Id = new Guid("ccee00a9-7fa0-4454-bc92-a6712fa2dd31"),
                 Name = "ASP.NET Core",
-                Description = Level.Level3,
+                Description = Level.Levels[2].Value,
                 Level = 3,
                 SkillId = skill1.Id,
             };
@@ -206,7 +206,7 @@ namespace RelationsPlatform.Persistence.Infrastructure
             {
                 Id = new Guid("6953c2fd-abed-403f-bd83-3adee9f18a1b"),
                 Name = "ASP.NET MVC",
-                Description = Level.Level2,
+                Description = Level.Levels[1].Value,
                 Level = 2,
                 SkillId = skill1.Id,
             };
@@ -215,7 +215,7 @@ namespace RelationsPlatform.Persistence.Infrastructure
             {
                 Id = new Guid("c1acf64a-82b5-4dad-b792-699553a93f90"),
                 Name = "HTML, CSS",
-                Description = Level.Level3,
+                Description = Level.Levels[2].Value,
                 Level = 3,
                 SkillId = skill1.Id,
             };
@@ -224,7 +224,7 @@ namespace RelationsPlatform.Persistence.Infrastructure
             {
                 Id = new Guid("a4a1f872-ff15-4022-b6cb-fd7406129338"),
                 Name = "JavaScript",
-                Description = Level.Level2,
+                Description = Level.Levels[1].Value,
                 Level = 2,
                 SkillId = skill1.Id,
             };
@@ -233,7 +233,7 @@ namespace RelationsPlatform.Persistence.Infrastructure
             {
                 Id = new Guid("11cc0691-ad51-46ae-91d8-42ab61bd39ff"),
                 Name = "Entity Framework",
-                Description = Level.Level3,
+                Description = Level.Levels[2].Value,
                 Level = 3,
                 SkillId = skill1.Id,
             };
@@ -242,7 +242,7 @@ namespace RelationsPlatform.Persistence.Infrastructure
             {
                 Id = new Guid("dbde8f57-eb7c-4037-b4d7-df63d1693dcf"),
                 Name = "Entity Framework Core",
-                Description = Level.Level3,
+                Description = Level.Levels[2].Value,
                 Level = 3,
                 SkillId = skill1.Id,
             };
@@ -251,7 +251,7 @@ namespace RelationsPlatform.Persistence.Infrastructure
             {
                 Id = new Guid("a59deb47-bdd7-40c2-856d-6c5f82d190da"),
                 Name = "MS SQL Sever",
-                Description = Level.Level3,
+                Description = Level.Levels[2].Value,
                 Level = 3,
                 SkillId = skill1.Id,
             };
@@ -260,7 +260,7 @@ namespace RelationsPlatform.Persistence.Infrastructure
             {
                 Id = new Guid("f305918a-ccab-422c-8e4b-f3e252749fcd"),
                 Name = "Postgress SQL",
-                Description = Level.Level3,
+                Description = Level.Levels[2].Value,
                 Level = 3,
                 SkillId = skill1.Id,
             };
@@ -269,7 +269,7 @@ namespace RelationsPlatform.Persistence.Infrastructure
             {
                 Id = new Guid("a86b40f6-f89e-4756-81a1-8c0e72425bb7"),
                 Name = "Фото, відео і аудіо редактори",
-                Description = Level.Level2,
+                Description = Level.Levels[1].Value,
                 Level = 2,
                 SkillId = skill1.Id,
             };

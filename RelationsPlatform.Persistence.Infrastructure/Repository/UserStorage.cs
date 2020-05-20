@@ -75,6 +75,23 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
             await _context.SaveChangesAsync();
         }
 
+        public async Task AddProfSkill(Guid contactId, string country, string region, string city, string district, string street, string numberOfHouse)
+        {
+            var address = new Address()
+            {
+                Country = country,
+                Region = region,
+                City = city,
+                District = district,
+                Street = street,
+                NumberOfHouse = numberOfHouse,
+                ContactId = contactId,
+            };
+
+            await _context.Addresses.AddAsync(address);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task EditUser(UserArgs args)
         {
             if (args == null)
