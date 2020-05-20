@@ -28,6 +28,10 @@ namespace RelationsPlatform.Web.Controllers
 
         public IActionResult Index(string returnUrl = null)
         {
+            if ((bool)this.User?.Identity?.IsAuthenticated)
+            {
+                return this.RedirectToAction("Profile", "User");
+            }
             return View(new LoginViewModel { ReturnUrl = returnUrl });
         }
 
