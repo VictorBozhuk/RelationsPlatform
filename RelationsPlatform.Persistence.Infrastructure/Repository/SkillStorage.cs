@@ -21,7 +21,5 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
         {
             return await _context.Skills.FirstOrDefaultAsync(x => x.UserId.ToString() == userId);
         }
-
-
     }
 }

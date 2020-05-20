@@ -74,6 +74,38 @@ namespace RelationsPlatform.Web.Controllers
             return RedirectToAction("Abilities");
         }
 
+        public async Task<IActionResult> AddCourse(CoursesViewModel model)
+        {
+            var user = await _userStorage.GetUser(User.Identity.Name);
+            var education = await _educationStorage.GetEducation(user.Id.ToString());
+            var course = new CourseArgs()
+            {
+                Name = model.Name,
+                Description = model.Description,
+                EducationId = education.Id,
+            };
+            await _courseStorage.AddCourse(course);
+
+            return RedirectToAction("Courses");
+        }
+
+        public async Task<IActionResult> AddHigherEducation(HigherEducationsViewModel model)
+        {
+            var user = await _userStorage.GetUser(User.Identity.Name);
+            var education = await _educationStorage.GetEducation(user.Id.ToString());
+            var higher = new HigherEducationArgs()
+            {
+                University = model.University,
+                Faculty = model.Faculty,
+                Specialty = model.Speciality,
+                Status = model.Status,
+                EducationId = education.Id,
+            };
+            await _higherEducationStorage.AddHigherEducation(higher);
+
+            return RedirectToAction("HigherEducations");
+        }
+
         public async Task<IActionResult> AddJob(JobsViewModel model)
         {
             var user = await _userStorage.GetUser(User.Identity.Name);
@@ -106,7 +138,29 @@ namespace RelationsPlatform.Web.Controllers
             return RedirectToAction("ProfessionSkills");
         }
 
-        public async Task<IActionResult> jobs()
+        public async Task<IActionResult> Courses()
+        {
+            var user = await _userStorage.GetUser(User.Identity.Name);
+            var courses = new CoursesViewModel()
+            {
+                Courses = user.Education.Courses.ToList(),
+            };
+
+            return View(courses);
+        }
+
+        public async Task<IActionResult> HigherEducations()
+        {
+            var user = await _userStorage.GetUser(User.Identity.Name);
+            var higher = new HigherEducationsViewModel()
+            {
+                higherEducations = user.Education.HigherEducations.ToList(),
+            };
+
+            return View(higher);
+        }
+
+        public async Task<IActionResult> Jobs()
         {
             var user = await _userStorage.GetUser(User.Identity.Name);
             var jobs = new JobsViewModel()
@@ -226,6 +280,20 @@ namespace RelationsPlatform.Web.Controllers
             await _abilityStorage.DeleteAbility(id);
 
             return RedirectToAction("Abilities");
+        }
+
+        public async Task<IActionResult> DeleteCourse(string id)
+        {
+            await _courseStorage.DeleteCourse(id);
+
+            return RedirectToAction("Courses");
+        }
+
+        public async Task<IActionResult> DeleteHigherEducation(string id)
+        {
+            await _higherEducationStorage.DeleteHigherEducation(id);
+
+            return RedirectToAction("HigherEducations");
         }
 
         public async Task<IActionResult> DeleteJob(string id)
