@@ -74,6 +74,22 @@ namespace RelationsPlatform.Web.Controllers
             return RedirectToAction("Abilities");
         }
 
+        public async Task<IActionResult> AddJob(JobsViewModel model)
+        {
+            var user = await _userStorage.GetUser(User.Identity.Name);
+            var skill = await _skillStorage.GetSkill(user.Id.ToString());
+            var job = new JobArgs()
+            {
+                NamePosition = model.NameOfPosition,
+                NameOfCompany = model.NameOfCompany,
+                DescriptionOfWork = model.DescriptionOfWork,
+                SkillId = skill.Id,
+            };
+            await _jobStorage.AddJob(job);
+
+            return RedirectToAction("Jobs");
+        }
+
         public async Task<IActionResult> AddProfSkill(ProfessionSkillsViewModel model)
         {
             var user = await _userStorage.GetUser(User.Identity.Name);
@@ -88,6 +104,17 @@ namespace RelationsPlatform.Web.Controllers
             await _profSkillStorage.AddProfessionSkill(profSkill);
 
             return RedirectToAction("ProfessionSkills");
+        }
+
+        public async Task<IActionResult> jobs()
+        {
+            var user = await _userStorage.GetUser(User.Identity.Name);
+            var jobs = new JobsViewModel()
+            {
+                Jobs = user.Skill.Jobs.ToList(),
+            };
+
+            return View(jobs);
         }
 
         public async Task<IActionResult> Profile()
@@ -199,6 +226,13 @@ namespace RelationsPlatform.Web.Controllers
             await _abilityStorage.DeleteAbility(id);
 
             return RedirectToAction("Abilities");
+        }
+
+        public async Task<IActionResult> DeleteJob(string id)
+        {
+            await _jobStorage.DeleteJob(id);
+
+            return RedirectToAction("Jobs");
         }
 
         public async Task<IActionResult> DeleteProfSkill(string id)

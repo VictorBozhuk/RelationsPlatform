@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+
 namespace RelationsPlatform.Persistence.Infrastructure.Repository
 {
     public class AbilityStorage : IAbilityStorage
