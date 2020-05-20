@@ -36,7 +36,7 @@ namespace RelationsPlatform.Web.Controllers
         {
             if ((bool)this.User?.Identity?.IsAuthenticated)
             {
-                return this.RedirectToAction("Index", "User");
+                return this.RedirectToAction("Profile", "User");
             }
 
             return this.View(new LoginViewModel { ReturnUrl = returnUrl });
@@ -59,7 +59,7 @@ namespace RelationsPlatform.Web.Controllers
                     }
                     else
                     {
-                        return this.RedirectToAction("Index", "User");
+                        return this.RedirectToAction("Profile", "User");
                     }
                 }
 
@@ -91,7 +91,7 @@ namespace RelationsPlatform.Web.Controllers
 
                     await _accountStorage.CreateUser(user);
                     await this.Authenticate(user);
-                    return this.RedirectToAction("Index", "User");
+                    return this.RedirectToAction("Profile", "User");
                 }
                 else
                 {

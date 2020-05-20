@@ -22,12 +22,10 @@
                         <span class="submenu-icon ml-auto"></span>
                     </div>
                 </a>
-            </li>
             <!-- Submenu content -->
-            <li>
                 <div id='submenu1' class="collapse sidebar-submenu">
-                    <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
-                        <span class="menu-collapsed">Charts</span>
+                    <a asp-action="Relations" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed">All People</span>
                     </a>
                     <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
                         <span class="menu-collapsed">Reports</span>
@@ -36,8 +34,6 @@
                         <span class="menu-collapsed">Tables</span>
                     </a>
                 </div>
-            </li>
-            <li>
                 <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-user fa-fw mr-3"></span>
@@ -45,19 +41,18 @@
                         <span class="submenu-icon ml-auto"></span>
                     </div>
                 </a>
-            </li>
             <!-- Submenu content -->
-            <li>
                 <div id='submenu2' class="collapse sidebar-submenu">
-                    <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
-                        <span class="menu-collapsed">Settings</span>
+                    <a asp-action="Profile" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed">My profile</span>
+                    </a>
+                    <a asp-action="EditUser" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed">Edit</span>
                     </a>
                     <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
                         <span class="menu-collapsed">Password</span>
                     </a>
                 </div>
-            </li>
-            <li>
                 <a href="#" class="bg-dark list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-tasks fa-fw mr-3"></span>
@@ -104,10 +99,8 @@
         </ul><!-- List Group END-->
     </div><!-- sidebar-container END -->
 
-    <div class="row">
-        <div class="col">
-            @RenderBody()
-        </div>
+    <div class="col p-4">
+        @RenderBody()
     </div>
 
 </div><!-- body-row END -->

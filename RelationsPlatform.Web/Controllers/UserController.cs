@@ -25,7 +25,7 @@ namespace RelationsPlatform.Web.Controllers
             _userStorage = userStorage;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Profile()
         {
             var user = await _userStorage.GetUser(User.Identity.Name);
             var userViewModel = new UserViewModel()
@@ -116,7 +116,7 @@ namespace RelationsPlatform.Web.Controllers
 
             await _userStorage.EditUser(args);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Profile");
         }
 
         public async Task<IActionResult> Relations()
