@@ -1,4 +1,5 @@
-﻿using RelationsPlatform.Persistence.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using RelationsPlatform.Persistence.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -26,6 +27,18 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
             };
             await _context.ProfessionSkills.AddAsync(skill);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteProfessionSkill(string id)
+        {
+            var profSkill = await GetProfessionSkill(id);
+            _context.ProfessionSkills.Remove(profSkill);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<ProfessionalSkill> GetProfessionSkill(string id)
+        {
+            return await _context.ProfessionSkills.FirstOrDefaultAsync(x => x.Id.ToString() == id);
         }
     }
 }

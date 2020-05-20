@@ -20,10 +20,30 @@ namespace RelationsPlatform.Web.Controllers
     public class UserController : Controller
     {
         private readonly IUserStorage _userStorage;
+        private readonly IAbilityStorage _abilityStorage;
+        private readonly IProfessionSkillStorage _profSkillStorage;
+        private readonly IJobStorage _jobStorage;
+        private readonly IEducationStorage _educationStorage;
+        private readonly ISchoolStorage _schoolStorage;
+        private readonly ICourseStorage _courseStorage;
+        private readonly IHigherEducationStorage _higherEducationStorage;
+        private readonly IRelationStorage _relationStorage;
+        private readonly ISkillStorage _skillStorage;
 
-        public UserController(IUserStorage userStorage)
+        public UserController(IUserStorage userStorage, IAbilityStorage abilityStorage, IProfessionSkillStorage profSkillStorage, 
+            IJobStorage jobStorage, IEducationStorage educationStorage, ISchoolStorage schoolStorage, ICourseStorage courseStorage, 
+            IHigherEducationStorage higherEducationStorage, IRelationStorage relationStorage, ISkillStorage skillStorage)
         {
             _userStorage = userStorage;
+            _abilityStorage = abilityStorage;
+            _profSkillStorage = profSkillStorage;
+            _jobStorage = jobStorage;
+            _educationStorage = educationStorage;
+            _schoolStorage = schoolStorage;
+            _courseStorage = courseStorage;
+            _higherEducationStorage = higherEducationStorage;
+            _relationStorage = relationStorage;
+            _skillStorage = skillStorage;
         }
 
         public async Task<IActionResult> Profile()
@@ -145,15 +165,24 @@ namespace RelationsPlatform.Web.Controllers
         public async Task<IActionResult> AddProfSkill(ProfessionSkillsViewModel model)
         {
             var user = await _userStorage.GetUser(User.Identity.Name);
-            var skill = await
-            var skills = new ProfessionSkillsViewModel()
+            var skill = await _skillStorage.GetSkill(user.Id.ToString());
+            var profSkill = new ProfessionSkillArgs()
             {
-                Levels = Level.Levels,
-                Skills = user.Skill.ProfesionSkills.ToList(),
+                Name = model.Name,
+                Level = model.Level,
+                description = Level.Levels.First(x => x.Key == model.Level).Value,
+                SkillId = skill.Id,
             };
+            await _profSkillStorage.AddProfessionSkill(profSkill);
 
-            return View(skills);
+            return RedirectToAction("ProfessionSkills");
         }
 
+        public async Task<IActionResult> DeleteProfSkill(string id)
+        {
+            await _profSkillStorage.DeleteProfessionSkill(id);
+
+            return RedirectToAction("ProfessionSkills");
+        }
     }
 }

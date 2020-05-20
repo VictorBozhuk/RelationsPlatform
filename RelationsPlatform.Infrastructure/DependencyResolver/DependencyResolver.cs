@@ -30,7 +30,7 @@ namespace RelationsPlatform.Infrastructure.DependencyResolver
             services.AddTransient<ISkillStorage, SkillStorage>();
             services.AddTransient<IEducationStorage, EducationStorage>();
             services.AddTransient<ISchoolStorage, SchoolStorage>();
-            services.AddTransient<ICourseStorage, ICourseStorage>();
+            services.AddTransient<ICourseStorage, CourseStorage>();
             services.AddTransient<IHigherEducationStorage, HigherEducationStorage>();
             services.AddTransient<IRelationStorage, RelationStorage>();
         }
