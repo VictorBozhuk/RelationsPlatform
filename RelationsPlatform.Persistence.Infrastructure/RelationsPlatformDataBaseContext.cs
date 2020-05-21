@@ -76,6 +76,20 @@ namespace RelationsPlatform.Persistence.Infrastructure
                 RoleId = userRole.Id,
             };
 
+
+            User user3 = new User()
+            {
+                Id = new Guid("2c3126ba-9a18-437d-bd8c-0f8f3870726b"),
+                Birthday = Convert.ToDateTime("15.1.2001"),
+                Description = "Мій опис не потребує опису",
+                DigitalName = "MaksV",
+                Gender = "Male",
+                Login = "b",
+                Name = "Павло Стрілецький",
+                Password = "123",
+                RoleId = userRole.Id,
+            };
+
             Contact contact1 = new Contact()
             {
                 Id = new Guid("2c3126ba-9a18-437d-bd8c-0f8f3870726b"),
@@ -96,6 +110,17 @@ namespace RelationsPlatform.Persistence.Infrastructure
                 Facebook = "Facebook.com",
                 Email = "bozhook@gmail.com",
                 UserId = user2.Id,
+            };
+
+            Contact contact3 = new Contact()
+            {
+                Id = new Guid("a3ced0f8-7d7a-4442-871e-5bcd401e74a3"),
+                Discord = "Discord.com",
+                Instagram = "Instagram.com",
+                Telegram = "Telegram.com",
+                Facebook = "Facebook.com",
+                Email = "bozhook@gmail.com",
+                UserId = user3.Id,
             };
 
 
@@ -123,6 +148,19 @@ namespace RelationsPlatform.Persistence.Infrastructure
                 ContactId = contact2.Id,
             };
 
+
+            Address address3 = new Address()
+            {
+                Id = new Guid("3fb6a621-256f-4c92-8f21-8e725590f749"),
+                Country = "Україна",
+                Region = "Львівська",
+                City = "Львів",
+                District = "Личаківський",
+                Street = "Медової печери",
+                NumberOfHouse = "39",
+                ContactId = contact3.Id,
+            };
+
             Education education1 = new Education()
             {
                 Id = new Guid("7bb37e34-041e-4098-b1b5-65023f6c2f1f"),
@@ -134,6 +172,13 @@ namespace RelationsPlatform.Persistence.Infrastructure
                 Id = new Guid("9d3e378b-889e-4871-b6ad-c34ac598fe06"),
                 UserId = user2.Id,
             };
+
+            Education education3 = new Education()
+            {
+                Id = new Guid("9d3e378b-889e-4871-b6ad-c34ac598fe06"),
+                UserId = user3.Id,
+            };
+
 
             School school1 = new School()
             {
@@ -166,6 +211,13 @@ namespace RelationsPlatform.Persistence.Infrastructure
                 MainProfession = ".NET C# Programmer",
             };
 
+            Skill skill3 = new Skill()
+            {
+                Id = new Guid("58e681f8-36f3-4a6c-805d-02101fdd2fac"),
+                UserId = user3.Id,
+                MainProfession = ".NET Web Developer",
+            };
+
             ProfessionalSkill ps1 = new ProfessionalSkill()
             {
                 Id = new Guid("3cf9a078-fdff-4a49-b3f8-98e5fb704389"),
@@ -173,6 +225,15 @@ namespace RelationsPlatform.Persistence.Infrastructure
                 Description = Level.Levels[3].Value,
                 Level = 4,
                 SkillId = skill1.Id,
+            };
+
+            ProfessionalSkill ps1s = new ProfessionalSkill()
+            {
+                Id = new Guid("58e681f8-36f3-4a6c-805d-02101fdd2fac"),
+                Name = "C#",
+                Description = Level.Levels[4].Value,
+                Level = 5,
+                SkillId = skill3.Id,
             };
 
             ProfessionalSkill ps2 = new ProfessionalSkill()
@@ -202,6 +263,15 @@ namespace RelationsPlatform.Persistence.Infrastructure
                 SkillId = skill1.Id,
             };
 
+            ProfessionalSkill ps4s = new ProfessionalSkill()
+            {
+                Id = new Guid("ccee00a9-7fa0-4454-bc92-a6712fa2dd31"),
+                Name = "ASP.NET Core",
+                Description = Level.Levels[3].Value,
+                Level = 4,
+                SkillId = skill1.Id,
+            };
+
             ProfessionalSkill ps5 = new ProfessionalSkill()
             {
                 Id = new Guid("6953c2fd-abed-403f-bd83-3adee9f18a1b"),
@@ -220,6 +290,15 @@ namespace RelationsPlatform.Persistence.Infrastructure
                 SkillId = skill1.Id,
             };
 
+            ProfessionalSkill ps6s = new ProfessionalSkill()
+            {
+                Id = new Guid("c1acf64a-82b5-4dad-b792-699553a93f90"),
+                Name = "HTML, CSS",
+                Description = Level.Levels[3].Value,
+                Level = 4,
+                SkillId = skill3.Id,
+            };
+
             ProfessionalSkill ps7 = new ProfessionalSkill()
             {
                 Id = new Guid("a4a1f872-ff15-4022-b6cb-fd7406129338"),
@@ -227,6 +306,15 @@ namespace RelationsPlatform.Persistence.Infrastructure
                 Description = Level.Levels[1].Value,
                 Level = 2,
                 SkillId = skill1.Id,
+            };
+
+            ProfessionalSkill ps7s = new ProfessionalSkill()
+            {
+                Id = new Guid("a4a1f872-ff15-4022-b6cb-fd7406129338"),
+                Name = "JavaScript",
+                Description = Level.Levels[2].Value,
+                Level = 3,
+                SkillId = skill3.Id,
             };
 
             ProfessionalSkill ps8 = new ProfessionalSkill()
@@ -274,17 +362,14 @@ namespace RelationsPlatform.Persistence.Infrastructure
                 SkillId = skill1.Id,
             };
 
-
-
-
-            modelBuilder.Entity<User>().HasData(new User[] { user1, user2 });
-            modelBuilder.Entity<Contact>().HasData(new Contact[] { contact1, contact2 });
-            modelBuilder.Entity<Address>().HasData(new Address[] { address1, address2 });
+            modelBuilder.Entity<User>().HasData(new User[] { user1, user2, user3 });
+            modelBuilder.Entity<Contact>().HasData(new Contact[] { contact1, contact2, contact3 });
+            modelBuilder.Entity<Address>().HasData(new Address[] { address1, address2, address3 });
             modelBuilder.Entity<Education>().HasData(new Education[] { education1, education2 });
             modelBuilder.Entity<HigherEducation>().HasData(new HigherEducation[] { he, });
             modelBuilder.Entity<School>().HasData(new School[] { school1, });
-            modelBuilder.Entity<Skill>().HasData(new Skill[] { skill1, skill2 });
-            modelBuilder.Entity<ProfessionalSkill>().HasData(new ProfessionalSkill[] { ps1, ps2, ps3, ps4, ps5, ps6, ps7, ps8, ps9, ps10, ps11, });
+            modelBuilder.Entity<Skill>().HasData(new Skill[] { skill1, skill2, skill3 });
+            modelBuilder.Entity<ProfessionalSkill>().HasData(new ProfessionalSkill[] { ps1, ps2, ps3, ps4, ps5, ps6, ps7, ps8, ps9, ps10, ps11, ps1s, ps4s, ps6s, ps7s, });
             modelBuilder.Entity<Ability>().HasData(new Ability[] { ab1, });
 
         }
