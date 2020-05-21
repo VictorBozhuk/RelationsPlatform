@@ -1,4 +1,8 @@
-﻿.emp-profile {
+﻿.checkedStar {
+    color: green;
+}
+
+.emp-profile {
     padding: 3%;
     margin-top: 0%;
     margin-bottom: 0%;

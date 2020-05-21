@@ -241,9 +241,9 @@ namespace RelationsPlatform.Web.Controllers
         public async Task<IActionResult> Profile()
         {
             var user = await _userStorage.GetUser(User.Identity.Name);
-            var userViewModel = new UserViewModel()
+            var userViewModel = new ProfileViewModel()
             {
-                Name = user.Name,
+                User = user,
             };
 
             return View(userViewModel);
