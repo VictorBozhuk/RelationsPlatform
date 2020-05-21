@@ -21,5 +21,13 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
         {
             return await _context.Skills.FirstOrDefaultAsync(x => x.UserId.ToString() == userId);
         }
+
+        public async Task EditSkill(string userId, string mainSkill)
+        {
+            var skill = await GetSkill(userId);
+            skill.MainProfession = mainSkill;
+            _context.Skills.Update(skill);
+            await _context.SaveChangesAsync();
+        }
     }
 }

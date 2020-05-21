@@ -1,0 +1,123 @@
+﻿@model RelationsPlatform.Web.ViewModels.AllUsersViewModel
+
+@{
+    ViewData["Title"] = "All users";
+    Layout = "~/Views/User/_Menu.cshtml";
+}
+
+
+<div class="container well" id="toggle">
+    <div class="row">
+        <a href="#" class="btn btn-link filter-btn pull-left"><span class="glyphicon glyphicon-filter gly"></span> Exclusive Filter</a>
+        <div class="slide-wrapper">
+            <form method="get">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group has-feedback has-clear">
+                            <label id="filter" for="exampleInputEmail1">Name</label>
+                            <input asp-for="Name" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="Name">
+                            <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group has-feedback has-clear">
+                            <label id="filter" for="exampleInputEmail1">Gender</label>
+                            <select class="form-control no-rounded" type="text" id="inputChoiseLecturer" asp-for="Gender">
+                                <option value="Everything" selected="selected">Everything</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                            <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group has-feedback has-clear">
+                            <label id="filter" for="exampleInputEmail1">City</label>
+                            <input asp-for="City" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="City">
+                            <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group has-feedback has-clear">
+                            <label id="filter" for="exampleInputEmail1">Profession skill</label>
+                            <input asp-for="ProfrssionSkill" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="Profession skill">
+                            <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group has-feedback has-clear">
+                            <label id="filter" for="exampleInputEmail1">Ability</label>
+                            <input asp-for="Ability" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="Ability">
+                            <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group has-feedback has-clear">
+                            <label id="filter" for="exampleInputEmail1">Job</label>
+                            <input asp-for="Job" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="Job">
+                            <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group has-feedback has-clear">
+                            <label id="filter" for="exampleInputEmail1">University</label>
+                            <input asp-for="University" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="University">
+                            <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group has-feedback has-clear">
+                            <label id="filter" for="exampleInputEmail1">Faculty</label>
+                            <input asp-for="Faculty" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="Faculty">
+                            <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button id="filter" type="submit" class="btn btn-primary pull-right">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="container emp-profile">
+    <form method="post">
+        @foreach (var user in Model.Users)
+        {
+            <div class="relationRow">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="row">
+                            <img src="~/img/ava.png" class="img-responsive" />
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>@user.Name</h4>
+                                <hr />
+                            </div>
+
+                            <div class="col-md-3">
+                                <p>Profession</p>
+                                <p>Birthday</p>
+                                <p>City</p>
+                            </div>
+                            <div class="col-md-3">
+                                <p>@user.Skill.MainProfession</p>
+                                <p>@user.Birthday.GetValueOrDefault().ToShortDateString()</p>
+                                <p>@user.Contact.Address.City</p>
+                            </div>
+                        </div>
+                    </div><!--profile-head close-->
+                </div>
+            </div>
+        }
+    </form>
+</div>

@@ -17,6 +17,7 @@ namespace RelationsPlatform.Web.ViewModels
         public string Description { get; set; }
         public string DigitalName { get; set; }
         public string Birthday { get; set; }
+        public string MainSkill { get; set; }
         public IFormFile File { get; set; }
         public byte[] Avatar { get; set; }
 

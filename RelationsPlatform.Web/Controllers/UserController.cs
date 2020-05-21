@@ -153,6 +153,58 @@ namespace RelationsPlatform.Web.Controllers
             return RedirectToAction("Courses");
         }
 
+        public async Task<IActionResult> AllUsers(AllUsersViewModel model)
+        {
+            var users = await _userStorage.GetUsers();
+
+            if (!string.IsNullOrEmpty(model.Name))
+            {
+                users = users.Intersect(users.Where(p => p.Name.ToLower().Contains(model.Name.ToLower()))).ToList();
+            }
+
+            if (model.Gender != null && model.Gender != "Everything")
+            {
+                users = users.Intersect(users.Where(p => p.Gender == model.Gender)).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(model.City))
+            {
+                users = users.Intersect(users.Where(p => p.Contact.Address.City.ToLower().Contains(model.City.ToLower()))).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(model.ProfrssionSkill))
+            {
+                users = users.Intersect(users.Where(p => p.Skill.ProfesionSkills.Where(x => x.Name.ToLower().Contains(model.ProfrssionSkill.ToLower())).Any())).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(model.Ability))
+            {
+                users = users.Intersect(users.Where(p => p.Skill.Abilities.Where(x => x.Name.ToLower().Contains(model.Ability.ToLower())).Any())).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(model.Job))
+            {
+                users = users.Intersect(users.Where(p => p.Skill.Jobs.Where(x => x.NamePosition.ToLower().Contains(model.Job.ToLower())).Any())).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(model.University))
+            {
+                users = users.Intersect(users.Where(p => p.Education.HigherEducations.Where(x => x.University.ToLower().Contains(model.University.ToLower())).Any())).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(model.Faculty))
+            {
+                users = users.Intersect(users.Where(p => p.Education.HigherEducations.Where(x => x.University.ToLower().Contains(model.Faculty.ToLower())).Any())).ToList();
+            }
+
+            AllUsersViewModel allUsers = new AllUsersViewModel()
+            {
+                Users = users,
+            };
+
+            return View(allUsers);
+        }
+
         public async Task<IActionResult> Courses()
         {
             var user = await _userStorage.GetUser(User.Identity.Name);
@@ -210,6 +262,7 @@ namespace RelationsPlatform.Web.Controllers
                 Password = user.Password,
                 DigitalName = user.DigitalName,
                 Avatar = user.Avatar,
+                MainSkill = user.Skill.MainProfession,
             };
 
             if(user.Contact != null)
@@ -237,10 +290,13 @@ namespace RelationsPlatform.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> EditUser(UserViewModel model)
         {
-            using (var ms = new MemoryStream())
+            if(model.File != null)
             {
-                model.File.CopyTo(ms);
-                model.Avatar = ms.ToArray();
+                using (var ms = new MemoryStream())
+                {
+                    model.File.CopyTo(ms);
+                    model.Avatar = ms.ToArray();
+                }
             }
             var address = new Address()
             {
@@ -275,6 +331,8 @@ namespace RelationsPlatform.Web.Controllers
                 Contact = contact,
             };
 
+            var user = await _userStorage.GetUser(User.Identity.Name);
+            await _skillStorage.EditSkill(user.Id.ToString(), model.MainSkill);
             await _userStorage.EditUser(args);
 
             return RedirectToAction("Profile");

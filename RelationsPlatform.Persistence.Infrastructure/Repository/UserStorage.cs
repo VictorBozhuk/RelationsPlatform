@@ -29,7 +29,11 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
 
         public async Task<List<User>> GetUsers()
         {
-            return await _context.Users.Include(x => x.Role).Include(x => x.Contact).ThenInclude(x => x.Address).Include(x => x.Skill).Where(x => x.Role.Name == "user").ToListAsync();
+            return await _context.Users.Include(x => x.Role).Include(x => x.Contact).ThenInclude(x => x.Address)
+                .Include(x => x.Skill).ThenInclude(x => x.Abilities).Include(x => x.Skill).ThenInclude(x => x.Jobs)
+                .Include(x => x.Skill).ThenInclude(x => x.ProfesionSkills).Include(x => x.Education).ThenInclude(x => x.Courses)
+                .Include(x => x.Education).ThenInclude(x => x.HigherEducations).Include(x => x.Education).ThenInclude(x => x.Schools)
+                .Where(x => x.Role.Name == "user").ToListAsync();
         }
 
         public async Task<Contact> GetContact(string userId)

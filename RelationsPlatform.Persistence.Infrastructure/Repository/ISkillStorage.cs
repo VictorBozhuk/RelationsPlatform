@@ -11,6 +11,7 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
     public interface ISkillStorage
     {
         Task<Skill> GetSkill(string userId);
+        Task EditSkill(string userId, string mainSkill);
     }
 
     public class SkillArgs
