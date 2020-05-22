@@ -236,6 +236,24 @@ namespace RelationsPlatform.Web.Controllers
             return View(userViewModel);
         }
 
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            var user = new UserArgs()
+            {
+                Login = User.Identity.Name,
+                Password = model.NewPassword,
+            };
+
+            await _userStorage.ChangePassword(user);
+            return RedirectToAction(nameof(Profile));
+        }
+
         public async Task<IActionResult> HigherEducations()
         {
             var user = await _userStorage.GetUser(User.Identity.Name);

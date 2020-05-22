@@ -118,6 +118,23 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
             await _context.SaveChangesAsync();
         }
 
+        public async Task ChangePassword(UserArgs args)
+        {
+            if (args == null)
+            {
+                throw new ArgumentNullException(nameof(args));
+            }
+
+            var user = await GetUser(args.Login);
+
+            if (user != null)
+            {
+                user.Password = args.Password;
+            }
+
+            await _context.SaveChangesAsync();
+        }
+
         public async Task EditUser(UserArgs args)
         {
             if (args == null)
