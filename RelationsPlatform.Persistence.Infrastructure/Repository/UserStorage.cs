@@ -73,18 +73,16 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
 
         public async Task AddFriend(Guid userId, string friendId)
         {
-            var user = await GetUserById(userId.ToString());
             var friendUser = await GetUserById(friendId);
             var relation = new Relation()
             {
-                User = user,
-                //RelationUser = friendUser,
+                UserId = userId,
+                RelationUserId = friendUser.Id,
                 Status = "Friend",
             };
             await _context.Relations.AddAsync(relation);
             await _context.SaveChangesAsync();
         }
-
 
         public async Task AddAddress(Guid contactId, string country, string region, string city, string district, string street, string numberOfHouse)
         {
@@ -171,6 +169,13 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
 
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task DeleteRelation(Guid userId, string friendId)
+        {
+            var relation = await _context.Relations.FirstAsync(x => x.UserId == userId && x.RelationUserId.ToString() == friendId);
+            _context.Relations.Remove(relation);
+            await _context.SaveChangesAsync();
         }
     }
 }

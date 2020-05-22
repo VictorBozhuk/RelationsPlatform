@@ -2,6 +2,7 @@
 using RelationsPlatform.Persistence.Infrastructure;
 using RelationsPlatform.Persistence.Infrastructure.Repository;
 using RelationsPlatform.Persistence.Model;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,7 +22,6 @@ namespace RelationsPlatform.Infrastructure.DependencyResolver
 
             services.AddDbContext<RelationsPlatformDataBaseContext>(optionsAction: (provider, optionsBuilder) => ConfigureSqlServer(provider, optionsBuilder));
 
-            // підключити сюда сервіси
             services.AddTransient<IAccountStorage, AccountStorage>();
             services.AddTransient<IUserStorage, UserStorage>();
             services.AddTransient<IAbilityStorage, AbilityStorage>();

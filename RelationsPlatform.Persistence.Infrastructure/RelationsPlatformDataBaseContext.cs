@@ -49,13 +49,13 @@ namespace RelationsPlatform.Persistence.Infrastructure
                 entity.HasOne(d => d.RelationUser)
                     .WithMany(p => p.MainRelations)
                     .HasForeignKey(d => d.RelationUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_DisciplineChoise_Student");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Relations)
                     .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_DisciplineChoise_DisciplineAvailability");
             });
 

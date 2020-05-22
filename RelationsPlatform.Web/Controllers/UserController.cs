@@ -389,6 +389,13 @@ namespace RelationsPlatform.Web.Controllers
             return RedirectToAction("Schools");
         }
 
+        public async Task<IActionResult> DeleteRelation(string id)
+        {
+            await _schoolStorage.DeleteSchool(id);
+
+            return RedirectToAction(nameof(AllUsers));
+        }
+
         public async Task<IActionResult> ProfessionSkills()
         {
             var user = await _userStorage.GetUser(User.Identity.Name);

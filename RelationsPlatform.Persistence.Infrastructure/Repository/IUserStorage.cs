@@ -17,6 +17,7 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
         Task AddContact(Guid userId, string instagram, string telegram, string facebook, string email, string discord);
         Task AddAddress(Guid contactId, string country, string region, string city, string district, string street, string numberOfHouse);
         Task AddFriend(Guid userId, string friendId);
+        Task DeleteRelation(Guid userId, string friendId);
     }
 
     public class UserArgs
