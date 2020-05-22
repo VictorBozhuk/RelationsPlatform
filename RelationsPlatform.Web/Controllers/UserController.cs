@@ -224,6 +224,18 @@ namespace RelationsPlatform.Web.Controllers
             return View(courses);
         }
 
+        public async Task<IActionResult> Chat(ChatViewModel model)
+        {
+            var user = await _userStorage.GetUser(User.Identity.Name);
+
+            
+            var userViewModel = new ChatViewModel()
+            {
+                User = user,
+            };
+            return View(userViewModel);
+        }
+
         public async Task<IActionResult> HigherEducations()
         {
             var user = await _userStorage.GetUser(User.Identity.Name);

@@ -22,11 +22,16 @@ namespace RelationsPlatform.Persistence.Model
         public virtual Education Education { get; set; }
         public virtual ICollection<Relation> Relations { get; set; }
         public virtual ICollection<Relation> MainRelations { get; set; }
+        public virtual ICollection<Message> MyMessages { get; set; }
+        public virtual ICollection<Message> MessegesForMe { get; set; }
 
         public User()
         {
             Id = Guid.NewGuid();
             Relations = new HashSet<Relation>();
+            MainRelations = new HashSet<Relation>();
+            MyMessages = new HashSet<Message>();
+            MessegesForMe = new HashSet<Message>();
         }
     }
 }

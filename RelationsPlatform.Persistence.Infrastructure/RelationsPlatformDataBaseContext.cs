@@ -50,13 +50,28 @@ namespace RelationsPlatform.Persistence.Infrastructure
                     .WithMany(p => p.MainRelations)
                     .HasForeignKey(d => d.RelationUserId)
                     .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_DisciplineChoise_Student");
+                    .HasConstraintName("FK_Relations");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Relations)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_DisciplineChoise_DisciplineAvailability");
+                    .HasConstraintName("FK_Realtions2");
+            });
+
+            modelBuilder.Entity<Message>(entity =>
+            {
+                entity.HasOne(d => d.RelationUser)
+                    .WithMany(p => p.MessegesForMe)
+                    .HasForeignKey(d => d.RelationUserId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK_Messages");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.MyMessages)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK_Messages2");
             });
 
             User user1 = new User()
