@@ -10,5 +10,10 @@ namespace RelationsPlatform.Persistence.Model
         public string NameCompany { get; set; }
         public string DescriptionOfWork { get; set; }
         public virtual Skill Skill { get; set; }
+
+        public Job()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

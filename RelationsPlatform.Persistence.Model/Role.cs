@@ -11,6 +11,7 @@ namespace RelationsPlatform.Persistence.Model
 
         public Role()
         {
+            Id = Guid.NewGuid();
             People = new List<User>();
         }
     }

@@ -9,6 +9,7 @@ namespace RelationsPlatform.Web.ViewModels
 {
     public class RelationProfileViewModel
     {
+        public string Id { get; set; }
         public string Status { get; set; }
         public User User { get; set; }
     }

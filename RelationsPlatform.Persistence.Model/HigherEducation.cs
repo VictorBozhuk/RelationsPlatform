@@ -11,5 +11,10 @@ namespace RelationsPlatform.Persistence.Model
         public string Specialty { get; set; }
         public string Status { get; set; }
         public virtual Education Education { get; set; }
+
+        public HigherEducation()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

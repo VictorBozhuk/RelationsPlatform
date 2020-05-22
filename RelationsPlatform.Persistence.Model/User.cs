@@ -21,9 +21,11 @@ namespace RelationsPlatform.Persistence.Model
         public virtual Skill Skill { get; set; }
         public virtual Education Education { get; set; }
         public virtual ICollection<Relation> Relations { get; set; }
+        public virtual ICollection<Relation> MainRelations { get; set; }
 
         public User()
         {
+            Id = Guid.NewGuid();
             Relations = new HashSet<Relation>();
         }
     }

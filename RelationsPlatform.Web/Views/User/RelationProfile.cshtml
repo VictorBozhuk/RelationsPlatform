@@ -48,11 +48,11 @@
             <div class="col-md-2">
                 @if (Model.Status != null)
                 {
-                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Видалити з друзів" />
+                    <input type="submit" asp-action="DeleteFriend" asp-route-id="@Model.User.Id" class="profile-edit-btn" name="btnAddMore" style="width:150px;" value="Видалити з друзів" />
                 }
                 else
                 {
-                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Добавити до друзів" />
+                    <input type="submit" asp-action="AddFriend" asp-route-id="@Model.User.Id" class="profile-edit-btn" name="btnAddMore" style="width:150px;" value="Добавити до друзів" />
                 }
             </div>
         </div>
@@ -80,13 +80,13 @@
                         <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="row">
                                 <div class="col">
+                                    @if (Model.User.Skill.ProfesionSkills != null)
+                                    {
                                     <div class="row">
                                         <div class="col">
                                             <label>Префесійні навики</label>
                                         </div>
                                     </div>
-                                    @if (Model.User.Skill.ProfesionSkills != null)
-                                    {
                                         foreach (var item in Model.User.Skill.ProfesionSkills)
                                         {
                                             <div class="row">
@@ -118,13 +118,13 @@
                             </div>
                             <div class="row">
                                 <div class="col">
+                                    @if (Model.User.Skill.Abilities != null)
+                                    {
                                     <div class="row">
                                         <div class="col">
                                             <label>Здібності</label>
                                         </div>
                                     </div>
-                                    @if (Model.User.Skill.Abilities != null)
-                                    {
                                         foreach (var item in Model.User.Skill.Abilities)
                                         {
                                             <div class="row">

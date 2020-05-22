@@ -24,7 +24,16 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
                 .Include(x => x.Skill).ThenInclude(x => x.Abilities).Include(x => x.Skill).ThenInclude(x => x.Jobs)
                 .Include(x => x.Skill).ThenInclude(x => x.ProfesionSkills).Include(x => x.Education).ThenInclude(x => x.Courses)
                 .Include(x => x.Education).ThenInclude(x => x.HigherEducations).Include(x => x.Education).ThenInclude(x => x.Schools)
-                .FirstOrDefaultAsync(u => u.Login == login);
+                .Include(x => x.Relations).ThenInclude(x => x.RelationUser).Include(x => x.MainRelations).ThenInclude(x => x.User).FirstOrDefaultAsync(u => u.Login == login);
+        }
+
+        public async Task<User> GetUserById(string id)
+        {
+            return await _context.Users.Include(x => x.Role).Include(x => x.Contact).ThenInclude(x => x.Address)
+                .Include(x => x.Skill).ThenInclude(x => x.Abilities).Include(x => x.Skill).ThenInclude(x => x.Jobs)
+                .Include(x => x.Skill).ThenInclude(x => x.ProfesionSkills).Include(x => x.Education).ThenInclude(x => x.Courses)
+                .Include(x => x.Education).ThenInclude(x => x.HigherEducations).Include(x => x.Education).ThenInclude(x => x.Schools)
+                .Include(x => x.Relations).ThenInclude(x => x.RelationUser).Include(x => x.MainRelations).ThenInclude(x => x.User).FirstOrDefaultAsync(u => u.Id.ToString() == id);
         }
 
         public async Task<List<User>> GetUsers()
@@ -33,7 +42,7 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
                 .Include(x => x.Skill).ThenInclude(x => x.Abilities).Include(x => x.Skill).ThenInclude(x => x.Jobs)
                 .Include(x => x.Skill).ThenInclude(x => x.ProfesionSkills).Include(x => x.Education).ThenInclude(x => x.Courses)
                 .Include(x => x.Education).ThenInclude(x => x.HigherEducations).Include(x => x.Education).ThenInclude(x => x.Schools)
-                .Where(x => x.Role.Name == "user").ToListAsync();
+                .Include(x => x.Relations).ThenInclude(x => x.RelationUser).Include(x => x.MainRelations).ThenInclude(x => x.User).Where(x => x.Role.Name == "user").ToListAsync();
         }
 
         public async Task<Contact> GetContact(string userId)
@@ -61,6 +70,21 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
             await _context.Contacts.AddAsync(contact);
             await _context.SaveChangesAsync();
         }
+
+        public async Task AddFriend(Guid userId, string friendId)
+        {
+            var user = await GetUserById(userId.ToString());
+            var friendUser = await GetUserById(friendId);
+            var relation = new Relation()
+            {
+                User = user,
+                //RelationUser = friendUser,
+                Status = "Friend",
+            };
+            await _context.Relations.AddAsync(relation);
+            await _context.SaveChangesAsync();
+        }
+
 
         public async Task AddAddress(Guid contactId, string country, string region, string city, string district, string street, string numberOfHouse)
         {

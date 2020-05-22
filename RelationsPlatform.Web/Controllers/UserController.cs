@@ -122,6 +122,14 @@ namespace RelationsPlatform.Web.Controllers
             return RedirectToAction("Jobs");
         }
 
+        public async Task<IActionResult> AddFriend(string id)
+        {
+            var user = await _userStorage.GetUser(User.Identity.Name);
+            await _userStorage.AddFriend(user.Id, id);
+
+            return RedirectToAction(nameof(AllUsers));
+        }
+
         public async Task<IActionResult> AddProfSkill(ProfessionSkillsViewModel model)
         {
             var user = await _userStorage.GetUser(User.Identity.Name);
@@ -338,15 +346,6 @@ namespace RelationsPlatform.Web.Controllers
             return RedirectToAction("Profile");
         }
 
-        public async Task<IActionResult> Relations()
-        {
-            RelationsViewModel model = new RelationsViewModel()
-            {
-                Users = await _userStorage.GetUsers(),
-            };
-
-            return View(model);
-        }
 
         public async Task<IActionResult> DeleteAbility(string id)
         {
@@ -411,6 +410,38 @@ namespace RelationsPlatform.Web.Controllers
             };
 
             return View(schools);
+        }
+
+        public async Task<IActionResult> Relations()
+        {
+            var user = await _userStorage.GetUser(User.Identity.Name);
+            var idRelations = user.Relations.Select(x => x.RelationUser.Id).ToList();
+            var users = idRelations.Select(x => _userStorage.GetUserById(x.ToString()).Result).ToList();
+            RelationsViewModel model = new RelationsViewModel()
+            {
+                Users = users,
+            };
+
+            return View(model);
+        }
+
+
+        public async Task<IActionResult> RelationProfile(string id)
+        {
+            var user = await _userStorage.GetUser(User.Identity.Name);
+            var relationUser = await _userStorage.GetUserById(id);
+            string status = null;
+            if (user.Relations.Where(x => x.RelationUser == relationUser).Any())
+            {
+                status = "Friend";
+            }
+            var userViewModel = new RelationProfileViewModel()
+            {
+                Status = status,
+                User = relationUser,
+            };
+
+            return View(userViewModel);
         }
     }
 }
