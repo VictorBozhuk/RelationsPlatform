@@ -17,6 +17,7 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
     public class UserTaskArgs
     {
         public string Id { get; set; }
+        public string UserId { get; set; }
         public DateTime Date { get; set; }
         public string Subject { get; set; }
         public string ShortDescription { get; set; }

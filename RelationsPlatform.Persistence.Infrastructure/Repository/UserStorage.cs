@@ -25,7 +25,7 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
                 .Include(x => x.Skill).ThenInclude(x => x.ProfesionSkills).Include(x => x.Education).ThenInclude(x => x.Courses)
                 .Include(x => x.Education).ThenInclude(x => x.HigherEducations).Include(x => x.Education).ThenInclude(x => x.Schools)
                 .Include(x => x.Relations).ThenInclude(x => x.RelationUser).Include(x => x.MainRelations).ThenInclude(x => x.User)
-                .Include(x => x.Feedbacks).FirstOrDefaultAsync(u => u.Login == login);
+                .Include(x => x.Feedbacks).Include(x => x.Tasks).FirstOrDefaultAsync(u => u.Login == login);
         }
 
         public async Task<User> GetUserById(string id)
@@ -35,7 +35,7 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
                 .Include(x => x.Skill).ThenInclude(x => x.ProfesionSkills).Include(x => x.Education).ThenInclude(x => x.Courses)
                 .Include(x => x.Education).ThenInclude(x => x.HigherEducations).Include(x => x.Education).ThenInclude(x => x.Schools)
                 .Include(x => x.Relations).ThenInclude(x => x.RelationUser).Include(x => x.MainRelations).ThenInclude(x => x.User)
-                .Include(x => x.Feedbacks).FirstOrDefaultAsync(u => u.Id.ToString() == id);
+                .Include(x => x.Feedbacks).Include(x => x.Tasks).FirstOrDefaultAsync(u => u.Id.ToString() == id);
         }
 
         public async Task<List<User>> GetUsers()
@@ -45,7 +45,7 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
                 .Include(x => x.Skill).ThenInclude(x => x.ProfesionSkills).Include(x => x.Education).ThenInclude(x => x.Courses)
                 .Include(x => x.Education).ThenInclude(x => x.HigherEducations).Include(x => x.Education).ThenInclude(x => x.Schools)
                 .Include(x => x.Relations).ThenInclude(x => x.RelationUser).Include(x => x.MainRelations).ThenInclude(x => x.User)
-                .Include(x => x.Feedbacks).Where(x => x.Role.Name == "user").ToListAsync();
+                .Include(x => x.Feedbacks).Include(x => x.Tasks).Where(x => x.Role.Name == "user").ToListAsync();
         }
 
         public async Task<Contact> GetContact(string userId)

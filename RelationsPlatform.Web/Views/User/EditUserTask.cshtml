@@ -1,0 +1,58 @@
+﻿@model RelationsPlatform.Web.ViewModels.UserTaskViewModel
+
+@{
+    ViewData["Title"] = "Task";
+    Layout = "~/Views/User/_Menu.cshtml";
+}
+
+
+<link rel="stylesheet" href="~/css/createTask.css">
+
+<div class="container">
+    <form class="form-horizontal" role="form" asp-action="EditUserTask">
+        <input type="text" asp-for="TaskId" class="form-control" hidden="hidden">
+        <h2>Creating</h2>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Subject</label>
+            <div class="col-sm-9 ml-auto">
+                <select type="text" asp-for="Subject" class="form-control">
+                    @foreach (var item in Model.Subjects)
+                    {
+                        if (item == Model.Subject)
+                        {
+                            <option value="@item" selected="selected">@item</option>
+
+                        }
+                        else
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputFaculty" class="col-sm-2 col-form-label">Статус</label>
+            <div class="col-sm-9 ml-auto">
+                <input type="text" asp-for="Status" class="form-control" id="inputFaculty" placeholder="Статус">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputFaculty" class="col-sm-2 col-form-label">Короткий опис</label>
+            <div class="col-sm-9 ml-auto">
+                <input type="text" asp-for="ShortDescription" class="form-control" id="inputFaculty" placeholder="Короткий опис">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputDepartment" class="col-sm-2 col-form-label">Загальний опис</label>
+            <div class="col-sm-9 ml-auto">
+                <textarea type="text" asp-for="LongDescription" class="form-control" id="inputDepartment" placeholder="Загальний опис" rows="3"></textarea>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <button type="submit" class="btn btn-sm btn-primary">Зберегти</button>
+            </div>
+        </div>
+    </form>
+</div>

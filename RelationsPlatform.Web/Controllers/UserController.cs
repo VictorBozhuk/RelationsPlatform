@@ -402,6 +402,41 @@ namespace RelationsPlatform.Web.Controllers
             return RedirectToAction("Profile");
         }
 
+        public async Task<IActionResult> EditUserTask(string id)
+        {
+            var task = await _userTaskStorage.GetUserTask(id);
+            Subjects.subjects.Sort();
+            var model = new UserTaskViewModel()
+            {
+                Subjects = Subjects.subjects,
+                LongDescription = task.LongDescription,
+                ShortDescription = task.ShortDescription,
+                Status = task.Status,
+                Subject = task.Subject,
+                TaskId = task.Id.ToString(),
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditUserTask(UserTaskViewModel model)
+        {
+            var user = await _userStorage.GetUser(User.Identity.Name);
+            var task = new UserTaskArgs()
+            {
+                Id = model.TaskId,
+                Date = DateTime.Now,
+                LongDescription = model.LongDescription,
+                ShortDescription = model.ShortDescription,
+                Subject = model.Subject,
+                Status = model.Status,
+            };
+
+            await _userTaskStorage.EditUserTask(task);
+            return RedirectToAction(nameof(MyUserTask), new { id = model.TaskId });
+        }
+
         public async Task<IActionResult> DeleteAbility(string id)
         {
             await _abilityStorage.DeleteAbility(id);
@@ -449,6 +484,33 @@ namespace RelationsPlatform.Web.Controllers
             await _schoolStorage.DeleteSchool(id);
 
             return RedirectToAction(nameof(AllUsers));
+        }
+
+        public async Task<IActionResult> MyUserTask(string id)
+        {
+            var task = await _userTaskStorage.GetUserTask(id);
+            var model = new UserTaskViewModel()
+            {
+                TaskId = id,
+                Subject = task.Subject,
+                LongDescription = task.LongDescription,
+                ShortDescription = task.ShortDescription,
+                Date = task.Date,
+                Status = task.Status,
+            };
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> MyUserTasks()
+        {
+            var user = await _userStorage.GetUser(User.Identity.Name);
+            var task = new UserTasksViewModel()
+            {
+                Tasks = user.Tasks.ToList(),
+            };
+
+            return View(task);
         }
 
         public async Task<IActionResult> ProfessionSkills()

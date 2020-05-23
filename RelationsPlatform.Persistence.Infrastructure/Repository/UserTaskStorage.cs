@@ -18,7 +18,7 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
 
         public async Task AddUserTask(UserTaskArgs args)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id.ToString() == args.Id);
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id.ToString() == args.UserId);
             var task = new UserTask()
             {
                 LongDescription = args.LongDescription,

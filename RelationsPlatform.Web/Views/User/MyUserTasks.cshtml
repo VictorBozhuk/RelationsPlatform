@@ -1,5 +1,30 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model RelationsPlatform.Web.ViewModels.UserTasksViewModel
+
 @{
+    ViewData["Title"] = "My Tasks";
+    Layout = "~/Views/User/_Menu.cshtml";
 }
+
+<div class="container emp-profile">
+    <form method="post">
+        @foreach (var item in Model.Tasks)
+        {
+            <div class="relationRow">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h4>@item.Subject</h4>
+                    </div>
+                    <div class="col-md-2">
+                        <a id="buttonListProfile" asp-action="MyUserTask" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Переглянути</a>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-12">
+                        <p style="margin-left:50px;">@item.ShortDescription</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </form>
+</div>

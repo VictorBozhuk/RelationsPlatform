@@ -7,6 +7,7 @@ namespace RelationsPlatform.Web.ViewModels
 {
     public class UserTaskViewModel
     {
+        public string TaskId { get; set; }
         public string UserId { get; set; }
         public DateTime Date { get; set; }
         public string Subject { get; set; }
