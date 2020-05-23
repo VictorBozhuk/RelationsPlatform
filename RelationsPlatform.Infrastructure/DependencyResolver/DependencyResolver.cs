@@ -33,6 +33,7 @@ namespace RelationsPlatform.Infrastructure.DependencyResolver
             services.AddTransient<ICourseStorage, CourseStorage>();
             services.AddTransient<IHigherEducationStorage, HigherEducationStorage>();
             services.AddTransient<IRelationStorage, RelationStorage>();
+            services.AddTransient<IUserTaskStorage, UserTaskStorage>();
         }
 
         private static void ConfigureSqlServer(IServiceProvider provider, DbContextOptionsBuilder optionsBuilder)

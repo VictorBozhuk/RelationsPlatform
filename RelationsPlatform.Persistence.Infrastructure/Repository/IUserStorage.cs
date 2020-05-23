@@ -19,6 +19,7 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
         Task AddFriend(Guid userId, string friendId);
         Task DeleteRelation(Guid userId, string friendId);
         Task ChangePassword(UserArgs args);
+        Task AddFeedback(string login, string friendId, int note);
     }
 
     public class UserArgs

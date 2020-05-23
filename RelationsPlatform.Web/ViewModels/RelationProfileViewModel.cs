@@ -11,6 +11,7 @@ namespace RelationsPlatform.Web.ViewModels
     {
         public string Id { get; set; }
         public string Status { get; set; }
+        public int Note { get; set; }
         public User User { get; set; }
     }
 }

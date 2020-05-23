@@ -29,10 +29,11 @@ namespace RelationsPlatform.Web.Controllers
         private readonly IHigherEducationStorage _higherEducationStorage;
         private readonly IRelationStorage _relationStorage;
         private readonly ISkillStorage _skillStorage;
+        private readonly IUserTaskStorage _userTaskStorage;
 
         public UserController(IUserStorage userStorage, IAbilityStorage abilityStorage, IProfessionSkillStorage profSkillStorage, 
             IJobStorage jobStorage, IEducationStorage educationStorage, ISchoolStorage schoolStorage, ICourseStorage courseStorage, 
-            IHigherEducationStorage higherEducationStorage, IRelationStorage relationStorage, ISkillStorage skillStorage)
+            IHigherEducationStorage higherEducationStorage, IRelationStorage relationStorage, ISkillStorage skillStorage, IUserTaskStorage userTaskStorage)
         {
             _userStorage = userStorage;
             _abilityStorage = abilityStorage;
@@ -44,6 +45,7 @@ namespace RelationsPlatform.Web.Controllers
             _higherEducationStorage = higherEducationStorage;
             _relationStorage = relationStorage;
             _skillStorage = skillStorage;
+            _userTaskStorage = userTaskStorage;
         }
 
         public async Task<IActionResult> Abilities()
@@ -72,6 +74,13 @@ namespace RelationsPlatform.Web.Controllers
             await _abilityStorage.AddAbility(ability);
 
             return RedirectToAction("Abilities");
+        }
+
+        public async Task<IActionResult> AddFeedback(RelationProfileViewModel model)
+        {
+            await _userStorage.AddFeedback(User.Identity.Name, model.Id, model.Note);
+
+            return RedirectToAction(nameof(RelationProfile), new { id = $"{model.Id}" });
         }
 
         public async Task<IActionResult> AddCourse(CoursesViewModel model)
@@ -224,16 +233,33 @@ namespace RelationsPlatform.Web.Controllers
             return View(courses);
         }
 
-        public async Task<IActionResult> Chat(ChatViewModel model)
+        public IActionResult CreateUserTask()
+        {
+            Subjects.subjects.Sort();
+            var task = new UserTaskViewModel()
+            {
+                Subjects = Subjects.subjects,
+            };
+            return View(task);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateUserTask(UserTaskViewModel model)
         {
             var user = await _userStorage.GetUser(User.Identity.Name);
-
-            
-            var userViewModel = new ChatViewModel()
+            var task = new UserTaskArgs()
             {
-                User = user,
+                Id = user.Id.ToString(),
+                Date = DateTime.Now,
+                LongDescription = model.LongDescription,
+                ShortDescription = model.ShortDescription,
+                Subject = model.Subject,
+                Status = "Немає відповіді",
+                
             };
-            return View(userViewModel);
+
+            await _userTaskStorage.AddUserTask(task);
+            return RedirectToAction(nameof(UserTasks));
         }
 
         public IActionResult ChangePassword()
@@ -376,7 +402,6 @@ namespace RelationsPlatform.Web.Controllers
             return RedirectToAction("Profile");
         }
 
-
         public async Task<IActionResult> DeleteAbility(string id)
         {
             await _abilityStorage.DeleteAbility(id);
@@ -449,6 +474,32 @@ namespace RelationsPlatform.Web.Controllers
             return View(schools);
         }
 
+        public async Task<IActionResult> UserTasks()
+        {
+            var task = new UserTasksViewModel()
+            {
+                Tasks = await _userTaskStorage.GetAllUserTasks(),
+            };
+
+            return View(task);
+        }
+
+        public async Task<IActionResult> UserTask(string id)
+        {
+            var task = await _userTaskStorage.GetUserTask(id);
+            var model = new UserTaskViewModel()
+            {
+                Subject = task.Subject,
+                LongDescription = task.LongDescription,
+                ShortDescription = task.ShortDescription,
+                Date = task.Date,
+                UserId = task.UserId.ToString(),
+                Status = task.Status,
+            };
+
+            return View(model);
+        }
+
         public async Task<IActionResult> Relations()
         {
             var user = await _userStorage.GetUser(User.Identity.Name);
@@ -472,8 +523,16 @@ namespace RelationsPlatform.Web.Controllers
             {
                 status = "Friend";
             }
+            int note = 0;
+            var feedback = relationUser.Feedbacks.FirstOrDefault(x => x.SenderId == user.Id.ToString());
+            if (feedback != null)
+            {
+                note = feedback.Note;
+            }
             var userViewModel = new RelationProfileViewModel()
             {
+                Id = relationUser.Id.ToString(),
+                Note = note,
                 Status = status,
                 User = relationUser,
             };

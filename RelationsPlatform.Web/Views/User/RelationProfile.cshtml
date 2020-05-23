@@ -5,8 +5,11 @@
     Layout = "~/Views/User/_Menu.cshtml";
 }
 
-<div class="container emp-profile">
-    <form method="post">
+<script src="~/js/relationProfile.js"></script>
+
+
+    <div class="container emp-profile">
+
         <div class="row">
             <div class="col-md-4">
                 <div class="row justify-content-center">
@@ -20,7 +23,16 @@
                             <img alt="your image" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.User.Avatar)">
                         }
                     </div>
-                    <a id="sendMessage" class="btn btn-primary btn-sm">Написати повідомлення</a>
+                    <form method="post">
+                        @if (Model.Status != null)
+                        {
+                            <input id="addToFriend" type="submit" asp-route-id="@Model.User.Id" class="btn btn-grey btn-sm" value="Видалити з друзів" />
+                        }
+                        else
+                        {
+                            <input id="addToFriend" type="submit" asp-action="AddFriend" asp-route-id="@Model.User.Id" class="btn btn-primary btn-sm" value="Добавити до друзів" />
+                        }
+                    </form>
                 </div>
             </div>
             <div class="col-md-6">
@@ -49,14 +61,11 @@
                 </div>
             </div>
             <div class="col-md-2">
-                @if (Model.Status != null)
-                {
-                    <input type="submit" asp-route-id="@Model.User.Id" class="profile-edit-btn" name="btnAddMore" style="width:150px;" value="Видалити з друзів" />
-                }
-                else
-                {
-                    <input type="submit" asp-action="AddFriend" asp-route-id="@Model.User.Id" class="profile-edit-btn" name="btnAddMore" style="width:150px;" value="Добавити до друзів" />
-                }
+                <input type="button" class="btn btn-sm btn-info"
+                       style="padding-left:15px; padding-right:15px;"
+                       data-toggle="modal"
+                       value="Info"
+                       data-target="#exampleModal" />
             </div>
         </div>
         <div class="row">
@@ -85,11 +94,11 @@
                                 <div class="col">
                                     @if (Model.User.Skill.ProfesionSkills != null)
                                     {
-                                    <div class="row">
-                                        <div class="col">
-                                            <label>Префесійні навики</label>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label>Префесійні навики</label>
+                                            </div>
                                         </div>
-                                    </div>
                                         foreach (var item in Model.User.Skill.ProfesionSkills)
                                         {
                                             <div class="row">
@@ -123,11 +132,11 @@
                                 <div class="col">
                                     @if (Model.User.Skill.Abilities != null)
                                     {
-                                    <div class="row">
-                                        <div class="col">
-                                            <label>Здібності</label>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label>Здібності</label>
+                                            </div>
                                         </div>
-                                    </div>
                                         foreach (var item in Model.User.Skill.Abilities)
                                         {
                                             <div class="row">
@@ -433,5 +442,36 @@
                 </div>
             </div>
         </div>
-    </form>
-</div>
+    </div>
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+        <form asp-action="AddFeedback" method="post">
+            <input type="text" hidden="hidden" asp-for="Id"  class="form-control"  />
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Your Feedback</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-5">
+                                <input type="number" asp-for="Note" class="form-control" placeholder="0 - 100" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-grey" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-sm btn-success" value="Save" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>

@@ -22,7 +22,7 @@
                         <span class="submenu-icon ml-auto"></span>
                     </div>
                 </a>
-            <!-- Submenu content -->
+                <!-- Submenu content -->
                 <div id='submenu1' class="collapse sidebar-submenu">
                     <a asp-action="AllUsers" class="list-group-item list-group-item-action bg-dark text-white">
                         <span class="menu-collapsed">All People</span>
@@ -41,7 +41,7 @@
                         <span class="submenu-icon ml-auto"></span>
                     </div>
                 </a>
-            <!-- Submenu content -->
+                <!-- Submenu content -->
                 <div id='submenu2' class="collapse sidebar-submenu">
                     <a asp-action="Profile" class="list-group-item list-group-item-action bg-dark text-white">
                         <span class="menu-collapsed">My profile</span>
@@ -88,14 +88,20 @@
                             </a>
                         </div>
                     </div>
+                </div>
+                <a asp-action="UserTasks" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-tasks fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Tasks</span>
                     </div>
-                    <a href="#" class="bg-dark list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-start align-items-center">
-                            <span class="fa fa-tasks fa-fw mr-3"></span>
-                            <span class="menu-collapsed">Tasks</span>
-                        </div>
-                    </a>
-</li>
+                </a>
+                <a asp-action="CreateUserTask" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-tasks fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Create task</span>
+                    </div>
+                </a>
+            </li>
             <!-- Separator with title -->
             <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
                 <small>OPTIONS</small>

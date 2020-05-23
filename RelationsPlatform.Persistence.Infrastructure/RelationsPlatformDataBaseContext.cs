@@ -19,6 +19,7 @@ namespace RelationsPlatform.Persistence.Infrastructure
         public virtual DbSet<Contact> Contacts { get; set; }
         public virtual DbSet<Address> Addresses { get; set; }
         public virtual DbSet<Relation> Relations  { get; set; }
+        public virtual DbSet<Feedback> Feedbacks  { get; set; }
         public virtual DbSet<Skill> Skills { get; set; }
         public virtual DbSet<Job> Jobs { get; set; }
         public virtual DbSet<ProfessionalSkill> ProfessionSkills { get; set; }
@@ -28,6 +29,7 @@ namespace RelationsPlatform.Persistence.Infrastructure
         public virtual DbSet<School> Schools { get; set; }
         public virtual DbSet<HigherEducation> HigherEducation { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<UserTask> UserTasks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -57,21 +59,6 @@ namespace RelationsPlatform.Persistence.Infrastructure
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_Realtions2");
-            });
-
-            modelBuilder.Entity<Message>(entity =>
-            {
-                entity.HasOne(d => d.RelationUser)
-                    .WithMany(p => p.MessegesForMe)
-                    .HasForeignKey(d => d.RelationUserId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_Messages");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.MyMessages)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_Messages2");
             });
 
             User user1 = new User()
@@ -357,6 +344,17 @@ namespace RelationsPlatform.Persistence.Infrastructure
                 Status = "Friend",
             };
 
+            var task1 = new UserTask()
+            {
+                LongDescription = "wgefugefgoqw efqwgeof gf wef qg\nwe fwefwecwqecfqwefqwefc\ncwerwqeferfcawefawfergserhsrthdrth",
+                ShortDescription = "Написати консольну програму на мові C#.",
+                UserId = user1.Id,
+                Subject = "Програмування",
+            };
+
+
+
+
             modelBuilder.Entity<User>().HasData(new User[] { user1, user2, user3 });
             modelBuilder.Entity<Contact>().HasData(new Contact[] { contact1, contact2, contact3 });
             modelBuilder.Entity<Address>().HasData(new Address[] { address1, address2, address3 });
@@ -367,6 +365,7 @@ namespace RelationsPlatform.Persistence.Infrastructure
             modelBuilder.Entity<ProfessionalSkill>().HasData(new ProfessionalSkill[] { ps1, ps2, ps3, ps4, ps5, ps6, ps7, ps8, ps9, ps10, ps11, ps1s, ps4s, ps6s, ps7s, });
             modelBuilder.Entity<Ability>().HasData(new Ability[] { ab1, });
             modelBuilder.Entity<Relation>().HasData(new Relation[] { relation });
+            modelBuilder.Entity<UserTask>().HasData(new UserTask[] { task1, });
 
         }
 

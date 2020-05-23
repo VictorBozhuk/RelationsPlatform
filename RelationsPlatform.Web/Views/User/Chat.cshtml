@@ -1,4 +1,4 @@
-﻿@model RelationsPlatform.Web.ViewModels.ChatViewModel
+﻿
 
 @{
     ViewData["Title"] = "Chat";
@@ -6,7 +6,7 @@
 }
 
 <form asp-action="Chat" method="get">
-    <input asp-for="IdGetter" type="text" hidden="hidden" value="@Model.IdGetter"/>
+    <input  type="text" hidden="hidden"/>
     <div class="messaging">
         <div class="inbox_msg">
             <div class="inbox_people">
@@ -66,7 +66,7 @@
                 </div>
                 <div class="type_msg">
                     <div class="input_msg_write">
-                        <input asp-for="Text" type="text" class="write_msg" placeholder="Type a message" />
+                        <input  type="text" class="write_msg" placeholder="Type a message" />
                         <button class="msg_send_btn" type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                     </div>
                 </div>

@@ -24,7 +24,8 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
                 .Include(x => x.Skill).ThenInclude(x => x.Abilities).Include(x => x.Skill).ThenInclude(x => x.Jobs)
                 .Include(x => x.Skill).ThenInclude(x => x.ProfesionSkills).Include(x => x.Education).ThenInclude(x => x.Courses)
                 .Include(x => x.Education).ThenInclude(x => x.HigherEducations).Include(x => x.Education).ThenInclude(x => x.Schools)
-                .Include(x => x.Relations).ThenInclude(x => x.RelationUser).Include(x => x.MainRelations).ThenInclude(x => x.User).FirstOrDefaultAsync(u => u.Login == login);
+                .Include(x => x.Relations).ThenInclude(x => x.RelationUser).Include(x => x.MainRelations).ThenInclude(x => x.User)
+                .Include(x => x.Feedbacks).FirstOrDefaultAsync(u => u.Login == login);
         }
 
         public async Task<User> GetUserById(string id)
@@ -33,7 +34,8 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
                 .Include(x => x.Skill).ThenInclude(x => x.Abilities).Include(x => x.Skill).ThenInclude(x => x.Jobs)
                 .Include(x => x.Skill).ThenInclude(x => x.ProfesionSkills).Include(x => x.Education).ThenInclude(x => x.Courses)
                 .Include(x => x.Education).ThenInclude(x => x.HigherEducations).Include(x => x.Education).ThenInclude(x => x.Schools)
-                .Include(x => x.Relations).ThenInclude(x => x.RelationUser).Include(x => x.MainRelations).ThenInclude(x => x.User).FirstOrDefaultAsync(u => u.Id.ToString() == id);
+                .Include(x => x.Relations).ThenInclude(x => x.RelationUser).Include(x => x.MainRelations).ThenInclude(x => x.User)
+                .Include(x => x.Feedbacks).FirstOrDefaultAsync(u => u.Id.ToString() == id);
         }
 
         public async Task<List<User>> GetUsers()
@@ -42,7 +44,8 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
                 .Include(x => x.Skill).ThenInclude(x => x.Abilities).Include(x => x.Skill).ThenInclude(x => x.Jobs)
                 .Include(x => x.Skill).ThenInclude(x => x.ProfesionSkills).Include(x => x.Education).ThenInclude(x => x.Courses)
                 .Include(x => x.Education).ThenInclude(x => x.HigherEducations).Include(x => x.Education).ThenInclude(x => x.Schools)
-                .Include(x => x.Relations).ThenInclude(x => x.RelationUser).Include(x => x.MainRelations).ThenInclude(x => x.User).Where(x => x.Role.Name == "user").ToListAsync();
+                .Include(x => x.Relations).ThenInclude(x => x.RelationUser).Include(x => x.MainRelations).ThenInclude(x => x.User)
+                .Include(x => x.Feedbacks).Where(x => x.Role.Name == "user").ToListAsync();
         }
 
         public async Task<Contact> GetContact(string userId)
@@ -82,6 +85,32 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
             };
             await _context.Relations.AddAsync(relation);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task AddFeedback(string login, string friendId, int note)
+        {
+            var user = await GetUser(login);
+            var user2 = await GetUserById(friendId);
+
+            if(user2.Feedbacks.FirstOrDefault(x => x.SenderId == user.Id.ToString()) == null)
+            {
+                var feedback = new Feedback()
+                {
+                    SenderId = user.Id.ToString(),
+                    Note = note,
+                    UserId = user2.Id,
+                };
+
+                await _context.Feedbacks.AddAsync(feedback);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                var feedback = user2.Feedbacks.FirstOrDefault(x => x.SenderId == user.Id.ToString());
+                feedback.Note = note;
+                _context.Feedbacks.Update(feedback);
+                await _context.SaveChangesAsync();
+            }
         }
 
         public async Task AddAddress(Guid contactId, string country, string region, string city, string district, string street, string numberOfHouse)
