@@ -11,28 +11,28 @@
     <div class="d-flex justify-content-start h-100" style="position: absolute; top: 50%; transform: translateY(-50%);">
         <div class="card">
             <div class="card-header">
-                <h3>Sign In</h3>
+                <h3>Вхід</h3>
             </div>
             <div class="card-body">
-                <form method="post" asp-controller="Account" asp-action="Index" asp-route-returnUrl="@Model.ReturnUrl">
+                <form method="post" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">
 
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <input type="text" asp-for="Login" class="form-control" placeholder="login">
+                        <input type="text" asp-for="Login" class="form-control" placeholder="Логін">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" asp-for="Password" class="form-control" placeholder="password">
+                        <input type="password" asp-for="Password" class="form-control" placeholder="Пароль">
                     </div>
                     <div class="row align-items-center remember">
-                        <input asp-for="RememberMe" type="checkbox">Remember Me
+                        <input asp-for="RememberMe" type="checkbox">Запам'ятати?
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Login" class="btn float-right login_btn">
+                        <input type="submit" value="Увійти" class="btn float-right login_btn">
                     </div>
                     <div style="color:red; margin-top:-10px;" asp-validation-summary="ModelOnly"></div><br/>
                     <span style="color:red; margin-top:-10px;"  asp-validation-for="Password"></span><br />
@@ -42,7 +42,7 @@
             
             <div class="card-footer">
                 <div class="d-flex justify-content-center links">
-                    Don't have an account?<a asp-action="Registration">Sign Up</a>
+                    Не маєте акаунт?<a asp-action="Registration">Зареєструватися</a>
                 </div>
             </div>
         </div>

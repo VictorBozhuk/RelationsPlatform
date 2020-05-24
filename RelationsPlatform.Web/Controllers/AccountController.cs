@@ -35,33 +35,6 @@ namespace RelationsPlatform.Web.Controllers
             return View(new LoginViewModel { ReturnUrl = returnUrl });
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(LoginViewModel model)
-        {
-            if (this.ModelState.IsValid)
-            {
-                User user = await _accountStorage.GetUser(model.Login, model.Password);
-                if (user != null)
-                {
-                    await this.Authenticate(user);
-
-                    if (!string.IsNullOrWhiteSpace(model.ReturnUrl))
-                    {
-                        return this.Redirect(model.ReturnUrl);
-                    }
-                    else
-                    {
-                        return this.RedirectToAction("Profile", "User");
-                    }
-                }
-
-                this.ModelState.AddModelError(string.Empty, "Wrong login or password!");
-            }
-
-            return View(model);
-        }
-
         [HttpGet]
         public IActionResult Login(string returnUrl = null)
         {
@@ -97,7 +70,7 @@ namespace RelationsPlatform.Web.Controllers
                 this.ModelState.AddModelError(string.Empty, "Wrong login or password!");
             }
 
-            return View(model);
+            return RedirectToAction("Index", "Account", new { model });
         }
 
 

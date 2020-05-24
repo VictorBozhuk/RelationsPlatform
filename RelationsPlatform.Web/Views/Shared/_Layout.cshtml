@@ -27,9 +27,10 @@
     <link rel="stylesheet" href="~/css/allUsers.css" />
     <link rel="stylesheet" href="~/css/chat.css" />
     <link rel="stylesheet" href="~/css/changePassword.css" />
+
     @*<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">*@
-    @*<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">*@
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <!--Fontawesome CDN-->
     @*<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">*@
@@ -39,7 +40,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navStyle">
-            <a class="brand-navbar" asp-controller="Account" asp-action="Index" style="font-size:22px; color:#15b000; margin-left:50px;">StudBro</a>
+            <a class="brand-navbar" asp-controller="Account" asp-action="Index" style="font-size:22px; color:#15b000; margin-left:50px">StudBro</a>
             <button class="navbar-toggler" data-toggle="collapse" data-target="#mainMenu">
                 <span><i class="fas fa-align-right iconStyle"></i></span>
             </button>
@@ -56,7 +57,9 @@
                         <a  class="nav-link"><i class="fas fa-phone"></i>Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a asp-controller="Account" asp-action="Logout" class="nav-link"><i class="fas fa-users"></i>Вийти</a>
+                        <form method="post" asp-controller="Account" asp-action="Logout" style="margin-top:5px;">
+                            <i class="fas fa-users"></i><input type="submit" class="transButton" value="Вихід" />
+                        </form>
                     </li>
                 </ul>
             </div>
@@ -67,7 +70,7 @@
 
     <footer class="border-top footer text-muted" style="background:white;">
         <div class="container">
-            &copy; 2020 - StudBro
+            &copy; 2020 - RelationsPlatform
         </div>
     </footer>
 

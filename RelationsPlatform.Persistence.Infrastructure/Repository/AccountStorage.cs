@@ -18,7 +18,14 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
 
         public async Task CreateUser(User user)
         {
+            var skill = new Skill()
+            {
+                UserId = user.Id,
+            };
+            var education = new Education() { UserId = user.Id, };
             await _context.Users.AddAsync(user);
+            await _context.Skills.AddAsync(skill);
+            await _context.Educations.AddAsync(education);
             await _context.SaveChangesAsync();
         }
 

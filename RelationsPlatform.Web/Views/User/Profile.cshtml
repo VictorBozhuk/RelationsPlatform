@@ -12,7 +12,7 @@
                 <div class="profile-img">
                     @if (Model.User.Avatar == null)
                     {
-                        <img  src="~/img/ava.png"a">
+                        <img src="~/img/ava.png"/>
                     }
                     else
                     {
@@ -70,13 +70,13 @@
                         <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="row">
                                 <div class="col">
-                                    <div class="row">
-                                        <div class="col">
-                                            <label>Префесійні навики</label>
-                                        </div>
-                                    </div>
-                                    @if (Model.User.Skill.ProfesionSkills != null)
+                                    @if (Model.User.Skill.ProfesionSkills.Count == 0)
                                     {
+                                        <div class="row">
+                                            <div class="col">
+                                                <label>Префесійні навики</label>
+                                            </div>
+                                        </div>
                                         foreach (var item in Model.User.Skill.ProfesionSkills)
                                         {
                                             <div class="row">
@@ -108,13 +108,13 @@
                             </div>
                             <div class="row">
                                 <div class="col">
+                                    @if (Model.User.Skill.Abilities.Count == 0)
+                                    {
                                     <div class="row">
                                         <div class="col">
                                             <label>Здібності</label>
                                         </div>
                                     </div>
-                                    @if (Model.User.Skill.Abilities != null)
-                                    {
                                         foreach (var item in Model.User.Skill.Abilities)
                                         {
                                             <div class="row">
@@ -152,7 +152,7 @@
                         <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <div class="row">
                                 <div class="col">
-                                    @if (Model.User.Education.HigherEducations != null)
+                                    @if (Model.User.Education.HigherEducations.Count == 0)
                                     {
                                         <div class="row">
                                             <div class="col">
@@ -207,7 +207,7 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    @if (Model.User.Education.Schools != null)
+                                    @if (Model.User.Education.Schools.Count == 0)
                                     {
                                         <div class="row">
                                             <div class="col">
@@ -245,7 +245,7 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    @if (Model.User.Education.Courses != null)
+                                    @if (Model.User.Education.Courses.Count == 0)
                                     {
                                         <div class="row">
                                             <div class="col">
@@ -290,7 +290,7 @@
                         <div class="tab-pane fade" id="professions" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="row">
                                 <div class="col">
-                                    @if (Model.User.Skill.Jobs != null)
+                                    @if (Model.User.Skill.Jobs.Count == 0)
                                     {
                                         int count = 1;
                                         foreach (var item in Model.User.Skill.Jobs)
