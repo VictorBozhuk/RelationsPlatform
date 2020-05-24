@@ -35,6 +35,33 @@ namespace RelationsPlatform.Web.Controllers
             return View(new LoginViewModel { ReturnUrl = returnUrl });
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(LoginViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                User user = await _accountStorage.GetUser(model.Login, model.Password);
+                if (user != null)
+                {
+                    await this.Authenticate(user);
+
+                    if (!string.IsNullOrWhiteSpace(model.ReturnUrl))
+                    {
+                        return this.Redirect(model.ReturnUrl);
+                    }
+                    else
+                    {
+                        return this.RedirectToAction("Profile", "User");
+                    }
+                }
+
+                this.ModelState.AddModelError(string.Empty, "Wrong login or password!");
+            }
+
+            return View(model);
+        }
+
         [HttpGet]
         public IActionResult Login(string returnUrl = null)
         {
@@ -70,7 +97,7 @@ namespace RelationsPlatform.Web.Controllers
                 this.ModelState.AddModelError(string.Empty, "Wrong login or password!");
             }
 
-            return this.View(model);
+            return View(model);
         }
 
 
@@ -86,22 +113,30 @@ namespace RelationsPlatform.Web.Controllers
                 User user = await _accountStorage.GetUser(model.Login);
                 if (user == null)
                 {
-                    user = new User { Login = model.Login, Password = model.Password, Name= model.Name };
-                    Role userRole = await _accountStorage.GetRole("user");
-                    if (userRole != null)
+                    if (model.Password == model.PasswordConfirm)
                     {
-                        user.Role = userRole;
-                    }
+                        user = new User { Login = model.Login, Password = model.Password, Name = model.Name };
+                        Role userRole = await _accountStorage.GetRole("user");
+                        if (userRole != null)
+                        {
+                            user.Role = userRole;
+                        }
 
-                    await _accountStorage.CreateUser(user);
-                    await this.Authenticate(user);
-                    return this.RedirectToAction("Profile", "User");
+                        await _accountStorage.CreateUser(user);
+                        await this.Authenticate(user);
+                        return this.RedirectToAction("Profile", "User");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Паролі не співпадають");
+                    }
                 }
                 else
                 {
-                    this.ModelState.AddModelError(string.Empty, "Wrong login or password!");
+                    ModelState.AddModelError(string.Empty, "Цей логін вже використовується");
                 }
             }
+
 
             return this.View(model);
         }

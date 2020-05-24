@@ -1,42 +1,40 @@
 ﻿@model RelationsPlatform.Web.ViewModels.RegistrationViewModel
+@{
+    ViewData["Title"] = "Registration";
+}
+
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-<style>
-    body {
-        background-color: #222534 /*#6F6349*/;
-        /*font-family: 'Shadows Into Light', cursive;*/
-        font-size: 16px;
-    }
-</style>
+<link rel="stylesheet" href="~/css/login.css" />
 
 
-<div id="login" class="container" style="min-height:320px">
+<div id="login" class="container" style="min-height:350px">
     <div class="d-flex justify-content-end h-100" style="position: absolute; top: 50%; transform: translateY(-50%);">
         <div class="card">
             <div class="card-header">
-                <h3>Registration</h3>
+                <h3>Реєстрація</h3>
             </div>
             <div class="card-body">
                 <form method="post" asp-controller="Account" asp-action="Registration">
-                    <div asp-validation-summary="ModelOnly"></div>
+                    <div style="color:red;" asp-validation-summary="ModelOnly"></div>
                     <div class="input-group form-group">
-                        <input type="text" asp-for="Name" class="form-control" placeholder="Name(Full name)">
-                        <span asp-validation-for="Name"></span>
+                        <input type="text" asp-for="Name" class="form-control" placeholder="Прізвище Ім'я">
                     </div>
+                        <span style="color:red;" asp-validation-for="Name"></span>
                     <div class="input-group form-group">
-                        <input type="text" asp-for="Login" class="form-control" placeholder="Login">
-                        <span asp-validation-for="Login"></span>
+                        <input type="text" asp-for="Login" class="form-control" placeholder="Логін">
                     </div>
+                        <span style="color:red;" asp-validation-for="Login"></span>
                     <div class="input-group form-group">
-                        <input type="password" asp-for="Password" class="form-control" placeholder="Password">
-                        <span asp-validation-for="Password"></span>
+                        <input type="password" asp-for="Password" class="form-control" placeholder="Пароль">
                     </div>
+                        <span style="color:red;" asp-validation-for="Password"></span>
                     <div class="input-group form-group">
-                        <input type="password" asp-for="PasswordConfirm" class="form-control" placeholder="Confirm password">
-                        <span asp-validation-for="PasswordConfirm"></span>
+                        <input type="password" asp-for="PasswordConfirm" class="form-control" placeholder="Підтвердити пароль">
                     </div>
+                        <span style="color:red;" asp-validation-for="PasswordConfirm"></span>
                     <div class="row justify-content-md-center">
                         <div class="form-group">
-                            <input type="submit" value="Register" class="btn float-right login_btn">
+                            <input type="submit" style="width:150px;" value="Зареєструватися" class="btn float-right login_btn">
                         </div>
                     </div>
                 </form>

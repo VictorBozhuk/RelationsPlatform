@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/navbar.css" />
     <link rel="stylesheet" href="~/css/startPage.css" />
-    <link rel="stylesheet" href="~/css/login.css" />
+
     <link rel="stylesheet" href="~/css/profile.css" />
     <link rel="stylesheet" href="~/css/relations.css" />
     <link rel="stylesheet" href="~/css/menu.css" />
@@ -28,38 +28,37 @@
     <link rel="stylesheet" href="~/css/chat.css" />
     <link rel="stylesheet" href="~/css/changePassword.css" />
     @*<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">*@
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    @*<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">*@
     <!--Fontawesome CDN-->
     @*<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">*@
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark mx-background-top-linear">
-            <div class="container">
-                <a class="navbar-brand" asp-controller="Account" asp-action="Index" style="text-transform: uppercase;"> RelationsPlatform</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-
-                    <ul class="navbar-nav ml-auto">
-
-                        <li class="nav-item active">
-                            <a class="nav-link" asp-controller="Account" asp-action="Index">
-                                Home
-                                <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <form method="post" asp-controller="Account" asp-action="Logout">
-                                <input type="submit" class="transButton" value="Log out" />
-                            </form>
-                        </li>
-                    </ul>
-                </div>
+        <nav class="navbar navbar-expand-lg navStyle">
+            <a class="brand-navbar" asp-controller="Account" asp-action="Index" style="font-size:22px; color:#15b000; margin-left:50px;">StudBro</a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#mainMenu">
+                <span><i class="fas fa-align-right iconStyle"></i></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainMenu">
+                <ul class="navbar-nav ml-auto navList">
+                    <li class="nav-item active"><a asp-controller="Account" asp-action="Index" class="nav-link"><i class="fas fa-home"></i>Головна<span class="sr-only">(current)</span></a></li>
+                    <li class="nav-item">
+                        <a  class="nav-link"><i class="fas fa-cogs"></i>Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a  class="nav-link"><i class="fas fa-briefcase"></i>Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a  class="nav-link"><i class="fas fa-phone"></i>Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-controller="Account" asp-action="Logout" class="nav-link"><i class="fas fa-users"></i>Вийти</a>
+                    </li>
+                </ul>
             </div>
         </nav>
     </header>
@@ -68,7 +67,7 @@
 
     <footer class="border-top footer text-muted" style="background:white;">
         <div class="container">
-            &copy; 2020 - RelationsPlatform
+            &copy; 2020 - StudBro
         </div>
     </footer>
 
