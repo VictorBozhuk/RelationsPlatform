@@ -10,10 +10,5 @@ namespace RelationsPlatform.Persistence.Model
         public string Description { get; set; }
         public int Level { get; set; }
         public virtual Skill Skill { get; set; }
-
-        public ProfessionalSkill()
-        {
-            Id = Guid.NewGuid();
-        }
     }
 }

@@ -13,10 +13,5 @@ namespace RelationsPlatform.Persistence.Model
         public string Street { get; set; }
         public string NumberOfHouse { get; set; }
         public virtual Contact Contact { get; set; }
-
-        public Address()
-        {
-            Id = Guid.NewGuid();
-        }
     }
 }

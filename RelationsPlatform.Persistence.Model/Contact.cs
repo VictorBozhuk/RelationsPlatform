@@ -15,10 +15,5 @@ namespace RelationsPlatform.Persistence.Model
 
         public virtual User User { get; set; }
         public virtual Address Address { get; set; }
-
-        public Contact()
-        {
-            Id = Guid.NewGuid();
-        }
     }
 }

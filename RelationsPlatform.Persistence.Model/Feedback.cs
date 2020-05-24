@@ -12,10 +12,5 @@ namespace RelationsPlatform.Persistence.Model
         public int Note { get; set; }
         public string SenderId { get; set; }
         public virtual User User { get; set; }
-
-        public Feedback()
-        {
-            Id = Guid.NewGuid();
-        }
     }
 }

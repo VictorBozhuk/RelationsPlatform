@@ -18,6 +18,34 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
             _context = context;
         }
 
+        public async Task CreateUser(UserArgs args)
+        {
+            if (args == null)
+            {
+                throw new ArgumentNullException(nameof(args));
+            }
+
+            var role = await _context.Roles.FirstOrDefaultAsync(x => x.Name == "user");
+            if (role != null)
+            {
+                var student = new User
+                {
+                    Login = args.Login,
+                    Password = args.Password,
+                    Name = args.Name,
+                    RoleId = role.Id
+                };
+
+                await _context.Users.AddAsync(student);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<User> GetUser(string login, string password)
+        {
+            return await _context.Users.Include(x => x.Role).FirstOrDefaultAsync(u => u.Login == login && u.Password == password);
+        }
+
         public async Task<User> GetUser(string login)
         {
             return await _context.Users.Include(x => x.Role).Include(x => x.Contact).ThenInclude(x => x.Address)
@@ -130,23 +158,6 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
             await _context.SaveChangesAsync();
         }
 
-        public async Task AddProfSkill(Guid contactId, string country, string region, string city, string district, string street, string numberOfHouse)
-        {
-            var address = new Address()
-            {
-                Country = country,
-                Region = region,
-                City = city,
-                District = district,
-                Street = street,
-                NumberOfHouse = numberOfHouse,
-                ContactId = contactId,
-            };
-
-            await _context.Addresses.AddAsync(address);
-            await _context.SaveChangesAsync();
-        }
-
         public async Task ChangePassword(UserArgs args)
         {
             if (args == null)
@@ -183,34 +194,39 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
                 user.DigitalName = args.DigitalName;
                 user.Gender = args.Gender;
                 user.Avatar = args.Avatar;
-
-                var contact = await GetContact(user.Id.ToString());
-                if(contact != null)
+                if (args.Contact != null)
                 {
-                    contact.Discord = args.Contact.Discord;
-                    contact.Instagram = args.Contact.Instagram;
-                    contact.Facebook = args.Contact.Facebook;
-                    contact.Email = args.Contact.Email;
-                    contact.Telegram = args.Contact.Telegram;
-
-                    var address = await GetAddress(contact.Id.ToString());
-                    if(address != null)
+                    var contact = await GetContact(user.Id.ToString());
+                    if (contact != null)
                     {
-                        address.Country = args.Contact.Address.Country;
-                        address.Region = args.Contact.Address.Region;
-                        address.City = args.Contact.Address.City;
-                        address.Street = args.Contact.Address.Street;
-                        address.NumberOfHouse = args.Contact.Address.NumberOfHouse;
+                        contact.Discord = args.Contact.Discord;
+                        contact.Instagram = args.Contact.Instagram;
+                        contact.Facebook = args.Contact.Facebook;
+                        contact.Email = args.Contact.Email;
+                        contact.Telegram = args.Contact.Telegram;
+
+                        if (args.Contact.Address != null)
+                        {
+                            var address = await GetAddress(contact.Id.ToString());
+                            if (address != null)
+                            {
+                                address.Country = args.Contact.Address.Country;
+                                address.Region = args.Contact.Address.Region;
+                                address.City = args.Contact.Address.City;
+                                address.Street = args.Contact.Address.Street;
+                                address.NumberOfHouse = args.Contact.Address.NumberOfHouse;
+                            }
+                            else
+                            {
+                                await AddAddress(contact.Id, args.Contact.Address.Country, args.Contact.Address.Region, args.Contact.Address.City,
+                                    args.Contact.Address.District, args.Contact.Address.Street, args.Contact.Address.NumberOfHouse);
+                            }
+                        }
                     }
                     else
                     {
-                        await AddAddress(contact.Id, args.Contact.Address.Country, args.Contact.Address.Region, args.Contact.Address.City, 
-                            args.Contact.Address.District, args.Contact.Address.Street, args.Contact.Address.NumberOfHouse);
+                        await AddContact(user.Id, args.Contact.Instagram, args.Contact.Telegram, args.Contact.Facebook, args.Contact.Email, args.Contact.Discord);
                     }
-                }
-                else
-                {
-                    await AddContact(user.Id, args.Contact.Instagram, args.Contact.Telegram, args.Contact.Facebook, args.Contact.Email, args.Contact.Discord);
                 }
 
                 await _context.SaveChangesAsync();

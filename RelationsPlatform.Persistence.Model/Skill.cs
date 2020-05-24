@@ -18,7 +18,6 @@ namespace RelationsPlatform.Persistence.Model
             Jobs = new HashSet<Job>();
             ProfesionSkills = new HashSet<ProfessionalSkill>();
             Abilities = new HashSet<Ability>();
-            Id = Guid.NewGuid();
         }
     }
 }

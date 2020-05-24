@@ -17,7 +17,7 @@ namespace RelationsPlatform.Persistence.Model
 
         public UserTask()
         {
-            Id = Guid.NewGuid();
+            //Id = Guid.NewGuid();
         }
     }
 }

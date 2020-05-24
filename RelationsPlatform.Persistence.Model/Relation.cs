@@ -12,10 +12,5 @@ namespace RelationsPlatform.Persistence.Model
         public string Status { get; set; }
         public virtual User User { get; set; }
         public virtual User RelationUser { get; set; }
-
-        public Relation()
-        {
-            Id = Guid.NewGuid();
-        }
     }
 }

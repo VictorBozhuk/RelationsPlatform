@@ -20,9 +20,11 @@ namespace RelationsPlatform.Web.Controllers
     public class AccountController : Controller
     {
         private readonly IAccountStorage _accountStorage;
+        private readonly IUserStorage _userStorage;
 
-        public AccountController(IAccountStorage accountStorage)
+        public AccountController(IAccountStorage accountStorage, IUserStorage userStorage)
         {
+            _userStorage = userStorage;
             _accountStorage = accountStorage;
         }
 
@@ -52,7 +54,7 @@ namespace RelationsPlatform.Web.Controllers
         {
             if (this.ModelState.IsValid)
             {
-                User user = await _accountStorage.GetUser(model.Login, model.Password);
+                User user = await _userStorage.GetUser(model.Login, model.Password);
                 if (user != null)
                 {
                     await this.Authenticate(user);
@@ -83,20 +85,16 @@ namespace RelationsPlatform.Web.Controllers
         {
             if (this.ModelState.IsValid)
             {
-                User user = await _accountStorage.GetUser(model.Login);
+                User user = await _userStorage.GetUser(model.Login);
                 if (user == null)
                 {
                     if (model.Password == model.PasswordConfirm)
                     {
-                        user = new User { Login = model.Login, Password = model.Password, Name = model.Name };
-                        Role userRole = await _accountStorage.GetRole("user");
-                        if (userRole != null)
-                        {
-                            user.Role = userRole;
-                        }
+                        var userArgs = new UserArgs { Login = model.Login, Password = model.Password, Name = model.Name };
 
-                        await _accountStorage.CreateUser(user);
-                        await this.Authenticate(user);
+                        await _userStorage.CreateUser(userArgs);
+                        var createdUser = await _userStorage.GetUser(model.Login);
+                        await this.Authenticate(createdUser);
                         return this.RedirectToAction("Profile", "User");
                     }
                     else

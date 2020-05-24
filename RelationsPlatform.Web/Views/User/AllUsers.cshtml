@@ -122,7 +122,10 @@
                                         <p>Місто</p>
                                     </div>
                                     <div class="col-md-9">
-                                        <p>@user.Skill.MainProfession</p>
+                                        @if(user.Skill != null)
+                                        {
+                                            <p>@user.Skill.MainProfession</p>
+                                        }
                                         <p>@user.Birthday.GetValueOrDefault().ToShortDateString()</p>
                                         @if(user.Contact != null && user.Contact.Address != null)
                                         {

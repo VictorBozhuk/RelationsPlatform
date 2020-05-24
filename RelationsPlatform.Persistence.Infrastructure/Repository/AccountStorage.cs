@@ -16,29 +16,6 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
             _context = context;
         }
 
-        public async Task CreateUser(User user)
-        {
-            var skill = new Skill()
-            {
-                UserId = user.Id,
-            };
-            var education = new Education() { UserId = user.Id, };
-            await _context.Users.AddAsync(user);
-            await _context.Skills.AddAsync(skill);
-            await _context.Educations.AddAsync(education);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task<User> GetUser(string login, string password)
-        {
-            return await _context.Users.Include(x => x.Role).FirstOrDefaultAsync(u => u.Login == login && u.Password == password);
-        }
-
-        public async Task<User> GetUser(string login)
-        {
-            return await _context.Users.FirstOrDefaultAsync(x => x.Login == login);
-        }
-
         public async Task<Role> GetRole(string name)
         {
             return await _context.Roles.FirstOrDefaultAsync(x => x.Name == name);

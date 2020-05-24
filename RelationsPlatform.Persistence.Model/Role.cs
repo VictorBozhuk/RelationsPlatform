@@ -7,12 +7,11 @@ namespace RelationsPlatform.Persistence.Model
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public List<User> People { get; set; }
+        public ICollection<User> People { get; set; }
 
         public Role()
         {
-            Id = Guid.NewGuid();
-            People = new List<User>();
+            People = new HashSet<User>();
         }
     }
 }

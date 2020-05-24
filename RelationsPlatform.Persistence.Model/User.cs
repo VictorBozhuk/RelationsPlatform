@@ -27,7 +27,7 @@ namespace RelationsPlatform.Persistence.Model
 
         public User()
         {
-            Id = Guid.NewGuid();
+            //Id = Guid.NewGuid();
             Relations = new HashSet<Relation>();
             MainRelations = new HashSet<Relation>();
             Feedbacks = new HashSet<Feedback>();

@@ -25,9 +25,12 @@
                     <h5>
                         @Model.User.Name
                     </h5>
-                    <h6>
-                        @Model.User.Skill.MainProfession
-                    </h6>
+                    @if(Model.User.Skill != null)
+                    {
+                        <h6>
+                            @Model.User.Skill.MainProfession
+                        </h6>
+                    }
                     <p class="proile-rating">Рейтинг : <span>@Model.Raiting</span></p>
                     <p class="proile-rating">Кількість відгуків : <span>@Model.User.Feedbacks.Count</span></p>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">

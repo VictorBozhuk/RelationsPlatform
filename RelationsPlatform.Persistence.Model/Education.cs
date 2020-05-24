@@ -17,7 +17,6 @@ namespace RelationsPlatform.Persistence.Model
             HigherEducations = new HashSet<HigherEducation>();
             Schools = new HashSet<School>();
             Courses = new HashSet<Course>();
-            Id = Guid.NewGuid();
         }
     }
 }
