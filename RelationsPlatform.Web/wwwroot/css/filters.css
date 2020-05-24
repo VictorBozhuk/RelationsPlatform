@@ -5,9 +5,10 @@
 .slide-wrapper {
     background-color: #fff;
     border: 1px solid #666;
+    margin-left: 30px;
+    margin-right: 30px;
     color: #fff;
     padding: 30px;
-    display: none;
 }
 
 .no-rounded {

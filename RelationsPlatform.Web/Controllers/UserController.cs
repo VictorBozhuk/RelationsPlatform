@@ -305,8 +305,18 @@ namespace RelationsPlatform.Web.Controllers
         public async Task<IActionResult> Profile()
         {
             var user = await _userStorage.GetUser(User.Identity.Name);
+            string raiting;
+            if(user.Feedbacks.Count == 0)
+            {
+                raiting = "0.0";
+            }
+            else
+            {
+                raiting = (user.Feedbacks.Select(x => x.Note).Sum() / user.Feedbacks.Count / 10.0).ToString();
+            }
             var userViewModel = new ProfileViewModel()
             {
+                Raiting = raiting,
                 User = user,
             };
 
@@ -562,17 +572,59 @@ namespace RelationsPlatform.Web.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Relations()
+        public async Task<IActionResult> Relations(RelationsViewModel model)
         {
             var user = await _userStorage.GetUser(User.Identity.Name);
             var idRelations = user.Relations.Select(x => x.RelationUser.Id).ToList();
+
             var users = idRelations.Select(x => _userStorage.GetUserById(x.ToString()).Result).ToList();
-            RelationsViewModel model = new RelationsViewModel()
+
+            if (!string.IsNullOrEmpty(model.Name))
+            {
+                users = users.Intersect(users.Where(p => p.Name.ToLower().Contains(model.Name.ToLower()))).ToList();
+            }
+
+            if (model.Gender != null && model.Gender != "Everything")
+            {
+                users = users.Intersect(users.Where(p => p.Gender == model.Gender)).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(model.City))
+            {
+                users = users.Intersect(users.Where(p => p.Contact.Address.City.ToLower().Contains(model.City.ToLower()))).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(model.ProfrssionSkill))
+            {
+                users = users.Intersect(users.Where(p => p.Skill.ProfesionSkills.Where(x => x.Name.ToLower().Contains(model.ProfrssionSkill.ToLower())).Any())).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(model.Ability))
+            {
+                users = users.Intersect(users.Where(p => p.Skill.Abilities.Where(x => x.Name.ToLower().Contains(model.Ability.ToLower())).Any())).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(model.Job))
+            {
+                users = users.Intersect(users.Where(p => p.Skill.Jobs.Where(x => x.NamePosition.ToLower().Contains(model.Job.ToLower())).Any())).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(model.University))
+            {
+                users = users.Intersect(users.Where(p => p.Education.HigherEducations.Where(x => x.University.ToLower().Contains(model.University.ToLower())).Any())).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(model.Faculty))
+            {
+                users = users.Intersect(users.Where(p => p.Education.HigherEducations.Where(x => x.University.ToLower().Contains(model.Faculty.ToLower())).Any())).ToList();
+            }
+
+            RelationsViewModel modelR = new RelationsViewModel()
             {
                 Users = users,
             };
 
-            return View(model);
+            return View(modelR);
         }
 
 

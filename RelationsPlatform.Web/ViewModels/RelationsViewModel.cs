@@ -8,6 +8,15 @@ namespace RelationsPlatform.Web.ViewModels
 {
     public class RelationsViewModel
     {
+        public string AbstractLevel { get; set; }
+        public string Name { get; set; }
+        public string Gender { get; set; }
+        public string City { get; set; }
+        public string ProfrssionSkill { get; set; }
+        public string Job { get; set; }
+        public string Ability { get; set; }
+        public string University { get; set; }
+        public string Faculty { get; set; }
         public List<User> Users { get; set; }
     }
 }

@@ -9,6 +9,7 @@ namespace RelationsPlatform.Web.ViewModels
 {
     public class ProfileViewModel
     {
+        public string Raiting { get; set; }
         public User User { get; set; }
     }
 }

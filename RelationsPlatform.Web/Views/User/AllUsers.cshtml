@@ -8,78 +8,77 @@
 
 <div class="container well" id="toggle">
     <div class="row">
-        <a href="#" class="btn btn-link filter-btn pull-left"><span class="glyphicon glyphicon-filter gly"></span> Exclusive Filter</a>
-        <div class="slide-wrapper">
-            <form method="get">
+        <form method="get">
+            <div class="slide-wrapper">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group has-feedback has-clear">
-                            <label id="filter" for="exampleInputEmail1">Name</label>
-                            <input asp-for="Name" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="Name">
+                            <label id="filter" for="exampleInputEmail1">Ім'я</label>
+                            <input asp-for="Name" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="Ім'я">
                             <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group has-feedback has-clear">
-                            <label id="filter" for="exampleInputEmail1">Gender</label>
+                            <label id="filter" for="exampleInputEmail1">Стать</label>
                             <select class="form-control no-rounded" type="text" id="inputChoiseLecturer" asp-for="Gender">
-                                <option value="Everything" selected="selected">Everything</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
+                                <option value="Всі" selected="selected">Всі</option>
+                                <option value="Чоловік">Чоловік</option>
+                                <option value="Жінка">Жінка</option>
                             </select>
                             <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group has-feedback has-clear">
-                            <label id="filter" for="exampleInputEmail1">City</label>
-                            <input asp-for="City" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="City">
+                            <label id="filter" for="exampleInputEmail1">Місто</label>
+                            <input asp-for="City" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="Місто">
                             <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group has-feedback has-clear">
-                            <label id="filter" for="exampleInputEmail1">Profession skill</label>
-                            <input asp-for="ProfrssionSkill" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="Profession skill">
+                            <label id="filter" for="exampleInputEmail1">Професійний навик</label>
+                            <input asp-for="ProfrssionSkill" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="Професійний навик">
                             <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group has-feedback has-clear">
-                            <label id="filter" for="exampleInputEmail1">Ability</label>
-                            <input asp-for="Ability" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="Ability">
+                            <label id="filter" for="exampleInputEmail1">Здібність</label>
+                            <input asp-for="Ability" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="Здібність">
                             <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group has-feedback has-clear">
-                            <label id="filter" for="exampleInputEmail1">Job</label>
-                            <input asp-for="Job" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="Job">
+                            <label id="filter" for="exampleInputEmail1">Професія</label>
+                            <input asp-for="Job" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="Професія">
                             <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group has-feedback has-clear">
-                            <label id="filter" for="exampleInputEmail1">University</label>
-                            <input asp-for="University" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="University">
+                            <label id="filter" for="exampleInputEmail1">Навчальний заклад</label>
+                            <input asp-for="University" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="Навчальний заклад">
                             <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group has-feedback has-clear">
-                            <label id="filter" for="exampleInputEmail1">Faculty</label>
-                            <input asp-for="Faculty" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="Faculty">
+                            <label id="filter" for="exampleInputEmail1">Факультет</label>
+                            <input asp-for="Faculty" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="Факультет">
                             <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <button id="filter" type="submit" class="btn btn-primary pull-right">Search</button>
+                        <button id="filter" type="submit" class="btn btn-secondary pull-right">Пошук</button>
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </div>
 
@@ -112,20 +111,23 @@
                                         <h4>@user.Name</h4>
                                     </div>
                                     <div class="col-md-2">
-                                        <a id="buttonListProfile" asp-action="RelationProfile" asp-route-id="@user.Id" class="btn btn-primary btn-sm">View Profile</a>
+                                        <a id="buttonListProfile" asp-action="RelationProfile" asp-route-id="@user.Id" class="btn btn-primary btn-sm">Профіль</a>
                                     </div>
                                 </div>
                                 <hr />
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <p>Profession</p>
-                                        <p>Birthday</p>
-                                        <p>City</p>
+                                        <p>Професія</p>
+                                        <p>День народження</p>
+                                        <p>Місто</p>
                                     </div>
                                     <div class="col-md-9">
                                         <p>@user.Skill.MainProfession</p>
                                         <p>@user.Birthday.GetValueOrDefault().ToShortDateString()</p>
-                                        <p>@user.Contact.Address.City</p>
+                                        @if(user.Contact != null && user.Contact.Address != null)
+                                        {
+                                            <p>@user.Contact.Address.City</p>
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -135,64 +137,4 @@
             </div>
         }
     </form>
-</div>
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 ID="Name" class="modal-title" id="exampleModalLabel"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-5">
-                        <p id="ModalWindowId">Department</p>
-                    </div>
-                    <div class="col-7">
-                        <p id="Department"></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-5">
-                        <p id="ModalWindowId">Faculty</p>
-                    </div>
-                    <div class="col-7">
-                        <p id="Faculty"></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-5">
-                        <p id="ModalWindowId">Min allowed students</p>
-                    </div>
-                    <div class="col-7">
-                        <p id="MinAllowedStudents"></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-5">
-                        <p id="ModalWindowId">Max allowed students</p>
-                    </div>
-                    <div class="col-7">
-                        <p id="MaxAllowedStudents"></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-5">
-                        <p id="ModalWindowId">Description</p>
-                    </div>
-                    <div class="col-7">
-                        <p ID="Description"></p>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-grey" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
 </div>
