@@ -291,6 +291,18 @@ namespace RelationsPlatform.Web.Controllers
             return View(higher);
         }
 
+        public async Task<IActionResult> FriendsOfFriend(string id)
+        {
+            var user = await _userStorage.GetUser(id);
+
+            AllUsersViewModel allUsers = new AllUsersViewModel()
+            {
+                Users = user.Relations.Select(x => x.RelationUser).ToList(),
+            };
+
+            return RedirectToAction("AllUsers", new { allUsers });
+        }
+
         public async Task<IActionResult> Jobs()
         {
             var user = await _userStorage.GetUser(User.Identity.Name);
@@ -300,27 +312,6 @@ namespace RelationsPlatform.Web.Controllers
             };
 
             return View(jobs);
-        }
-
-        public async Task<IActionResult> Profile()
-        {
-            var user = await _userStorage.GetUser(User.Identity.Name);
-            string raiting;
-            if(user.Feedbacks.Count == 0)
-            {
-                raiting = "0.0";
-            }
-            else
-            {
-                raiting = (user.Feedbacks.Select(x => x.Note).Sum() / user.Feedbacks.Count / 10.0).ToString();
-            }
-            var userViewModel = new ProfileViewModel()
-            {
-                Raiting = raiting,
-                User = user,
-            };
-
-            return View(userViewModel);
         }
 
         public async Task<IActionResult> EditUser()
@@ -576,8 +567,19 @@ namespace RelationsPlatform.Web.Controllers
         {
             var user = await _userStorage.GetUser(User.Identity.Name);
             var idRelations = user.Relations.Select(x => x.RelationUser.Id).ToList();
-
             var users = idRelations.Select(x => _userStorage.GetUserById(x.ToString()).Result).ToList();
+            if(model.AbstractLevel == "2")
+            {
+                var list = new List<User>();
+                foreach(var item in users)
+                {
+                    foreach (var item2 in item.Relations)
+                    {
+                        list.Add(item2.RelationUser);
+                    }
+                }
+                users = list.Distinct().ToList();
+            }
 
             if (!string.IsNullOrEmpty(model.Name))
             {
@@ -628,6 +630,27 @@ namespace RelationsPlatform.Web.Controllers
         }
 
 
+        public async Task<IActionResult> Profile()
+        {
+            var user = await _userStorage.GetUser(User.Identity.Name);
+            string raiting;
+            if (user.Feedbacks.Count == 0)
+            {
+                raiting = "0.0";
+            }
+            else
+            {
+                raiting = (user.Feedbacks.Select(x => x.Note).Sum() / user.Feedbacks.Count / 10.0).ToString();
+            }
+            var userViewModel = new ProfileViewModel()
+            {
+                Raiting = raiting,
+                User = user,
+            };
+
+            return View(userViewModel);
+        }
+
         public async Task<IActionResult> RelationProfile(string id)
         {
             var user = await _userStorage.GetUser(User.Identity.Name);
@@ -643,12 +666,22 @@ namespace RelationsPlatform.Web.Controllers
             {
                 note = feedback.Note;
             }
+            string raiting;
+            if (user.Feedbacks.Count == 0)
+            {
+                raiting = "0.0";
+            }
+            else
+            {
+                raiting = (user.Feedbacks.Select(x => x.Note).Sum() / user.Feedbacks.Count / 10.0).ToString();
+            }
             var userViewModel = new RelationProfileViewModel()
             {
                 Id = relationUser.Id.ToString(),
                 Note = note,
                 Status = status,
                 User = relationUser,
+                Raiting = raiting,
             };
 
             return View(userViewModel);

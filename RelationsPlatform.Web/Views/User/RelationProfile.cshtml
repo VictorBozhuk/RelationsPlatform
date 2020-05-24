@@ -8,340 +8,272 @@
 <script src="~/js/relationProfile.js"></script>
 
 
-    <div class="container emp-profile">
+<div class="container emp-profile">
 
-        <div class="row">
-            <div class="col-md-4">
-                <div class="row justify-content-center">
-                    <div class="profile-img">
-                        @if (Model.User.Avatar == null)
-                        {
-                            <img src="~/img/ava.png" />
-                        }
-                        else
-                        {
-                            <img alt="your image" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.User.Avatar)">
-                        }
-                    </div>
-                    <form method="post">
-                        @if (Model.Status != null)
-                        {
-                            <input id="addToFriend" type="submit" asp-route-id="@Model.User.Id" class="btn btn-grey btn-sm" value="Видалити з друзів" />
-                        }
-                        else
-                        {
-                            <input id="addToFriend" type="submit" asp-action="AddFriend" asp-route-id="@Model.User.Id" class="btn btn-primary btn-sm" value="Добавити до друзів" />
-                        }
-                    </form>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row justify-content-center">
+                <div class="profile-img">
+                    @if (Model.User.Avatar == null)
+                    {
+                        <img src="~/img/ava.png" />
+                    }
+                    else
+                    {
+                        <img alt="your image" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.User.Avatar)">
+                    }
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="profile-head">
-                    <h5>
-                        @Model.User.Name
-                    </h5>
-                    <h6>
-                        @Model.User.Skill.MainProfession
-                    </h6>
-                    <p class="proile-rating">Рейтинг : <span>8/10</span></p>
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Навики</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false">Освіта</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#address" role="tab" aria-controls="address" aria-selected="false">Адреса</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#professions" role="tab" aria-controls="professions" aria-selected="false">Професії</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <input type="button" class="btn btn-sm btn-info"
-                       style="padding-left:15px; padding-right:15px;"
+            <div class="row justify-content-center">
+                <div class="coll">
+
+                <input id="addToFriend" type="button" class="btn btn-sm btn-info"
+                       style="padding-left:15px; padding-right:15px; margin-bottom:10px;"
                        data-toggle="modal"
-                       value="Info"
+                       value="Залишити відгук"
                        data-target="#exampleModal" />
+
+                <form method="post">
+                    @if (Model.Status != null)
+                    {
+                        <input id="addToFriend" type="submit" asp-route-id="@Model.User.Id" class="btn btn-secondary btn-sm" value="Видалити з друзів" />
+                    }
+                    else
+                    {
+                        <input id="addToFriend" type="submit" asp-action="AddFriend" asp-route-id="@Model.User.Id" class="btn btn-primary btn-sm" value="Добавити до друзів" />
+                    }
+                </form>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="profile-work">
-                    <p>Посилання</p>
-                    <a href="">Telegram</a><br />
-                    <a href="">Instagram</a><br />
-                    <a href="">Email</a><br />
-                    <a href="">Discord</a><br />
-                    <a href="">Facebook</a>
-                    <p>Навики</p>
-                    <a href="">Web Designer</a><br />
-                    <a href="">Web Developer</a><br />
-                    <a href="">WordPress</a><br />
-                    <a href="">WooCommerce</a><br />
-                    <a href="">PHP, .Net</a><br />
-                </div>
+        <div class="col-md-6">
+            <div class="profile-head">
+                <h5>
+                    @Model.User.Name
+                </h5>
+                <h6>
+                    @Model.User.DigitalName
+                </h6>
+                <h6>
+                    @Model.User.Skill.MainProfession
+                </h6>
+                <p class="proile-rating">Рейтинг : <span>@Model.Raiting</span></p>
+                <p class="proile-rating">Кількість відгуків : <span>@Model.User.Feedbacks.Count</span></p>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Навики</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false">Освіта</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#address" role="tab" aria-controls="address" aria-selected="false">Адреса</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#professions" role="tab" aria-controls="professions" aria-selected="false">Професії</a>
+                    </li>
+                </ul>
             </div>
-            <div class="col-md-8">
-                <div class="tab-content profile-tab" id="myTabContent">
-                    @if (Model.User.Skill != null)
+        </div>
+        <div class="col-md-2">
+            <input type="submit" style="width:100px;" asp-action="FriendsOfFriend" asp-route-id="@Model.User.Id" class="btn btn-success btn-sm" value="Друзі" />
+        </div>
+    </div>
+    <div class="row" style="margin-top:30px;">
+        <div class="col-md-4">
+            <div class="profile-work">
+                <p>Посилання</p>
+                @if (Model.User.Contact != null)
+                {
+                    if (Model.User.Contact.Telegram != null)
                     {
-                        <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="row">
-                                <div class="col">
-                                    @if (Model.User.Skill.ProfesionSkills != null)
-                                    {
-                                        <div class="row">
-                                            <div class="col">
-                                                <label>Префесійні навики</label>
-                                            </div>
-                                        </div>
-                                        foreach (var item in Model.User.Skill.ProfesionSkills)
-                                        {
-                                            <div class="row">
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <p>@item.Name</p>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <a title="Рівень" data-toggle="popover" data-trigger="hover"
-                                                       data-content="<span class='glyphicon glyphicon-refresh paleyellow'></span> @item.Description">
-                                                        @for (int i = 1; i <= 5; ++i)
-                                                        {
-                                                            @if (item.Level >= i)
-                                                            {
-                                                                <span class="fa fa-star" style="color:orange;"></span>
-                                                            }
-                                                            else
-                                                            {
-                                                                <span class="fa fa-star"></span>
-                                                            }
-                                                        }
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        }
-                                    }
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    @if (Model.User.Skill.Abilities != null)
-                                    {
-                                        <div class="row">
-                                            <div class="col">
-                                                <label>Здібності</label>
-                                            </div>
-                                        </div>
-                                        foreach (var item in Model.User.Skill.Abilities)
-                                        {
-                                            <div class="row">
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <p>@item.Name</p>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <a title="Рівень" data-toggle="popover" data-trigger="hover"
-                                                       data-content="<span class='glyphicon glyphicon-refresh paleyellow'></span> @item.Description">
-                                                        @for (int i = 1; i <= 5; ++i)
-                                                        {
-                                                            @if (item.Level >= i)
-                                                            {
-                                                                <span class="fa fa-star" style="color:orange;"></span>
-                                                            }
-                                                            else
-                                                            {
-                                                                <span class="fa fa-star"></span>
-                                                            }
-                                                        }
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        }
-                                    }
+                        <a href="@Model.User.Contact.Telegram">Telegram</a><br />
+                    }
+                    if (Model.User.Contact.Instagram != null)
+                    {
+                        <a href="@Model.User.Contact.Instagram">Instagram</a><br />
+                    }
+                    if (Model.User.Contact.Email != null)
+                    {
+                        <a href="@Model.User.Contact.Email">Email</a><br />
+                    }
+                    if (Model.User.Contact.Discord != null)
+                    {
+                        <a href="@Model.User.Contact.Discord">Discord</a><br />
+                    }
+                    if (Model.User.Contact.Facebook != null)
+                    {
+                        <a href="@Model.User.Contact.Facebook">Facebook</a><br />
+                    }
+                }
+            </div>
+        </div>
+        <div class="col-md-8">
 
-                                </div>
+            <div class="tab-content profile-tab" id="myTabContent">
+                @if (Model.User.Skill != null)
+                {
+                    <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col">
+                                @if (Model.User.Skill.ProfesionSkills.Count != 0)
+                                {
+                                    <div class="row">
+                                        <div class="col">
+                                            <label>Префесійні навики</label>
+                                        </div>
+                                    </div>
+                                    foreach (var item in Model.User.Skill.ProfesionSkills)
+                                    {
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>@item.Name</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <a title="Рівень" data-toggle="popover" data-trigger="hover"
+                                                   data-content="<span class='glyphicon glyphicon-refresh paleyellow'></span> @item.Description">
+                                                    @for (int i = 1; i <= 5; ++i)
+                                                    {
+                                                        @if (item.Level >= i)
+                                                        {
+                                                            <span class="fa fa-star" style="color:orange;"></span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="fa fa-star"></span>
+                                                        }
+                                                    }
+                                                </a>
+                                            </div>
+                                        </div>
+                                    }
+                                }
                             </div>
                         </div>
-                    }
-                    @if (Model.User.Education != null)
-                    {
-                        <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="row">
-                                <div class="col">
-                                    @if (Model.User.Education.HigherEducations != null)
+                        <div class="row">
+                            <div class="col">
+                                @if (Model.User.Skill.Abilities.Count != 0)
+                                {
+                                    <div class="row">
+                                        <div class="col">
+                                            <label>Здібності</label>
+                                        </div>
+                                    </div>
+                                    foreach (var item in Model.User.Skill.Abilities)
                                     {
                                         <div class="row">
-                                            <div class="col">
-                                                <label>Вища освіта</label>
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>@item.Name</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <a title="Рівень" data-toggle="popover" data-trigger="hover"
+                                                   data-content="<span class='glyphicon glyphicon-refresh paleyellow'></span> @item.Description">
+                                                    @for (int i = 1; i <= 5; ++i)
+                                                    {
+                                                        @if (item.Level >= i)
+                                                        {
+                                                            <span class="fa fa-star" style="color:orange;"></span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="fa fa-star"></span>
+                                                        }
+                                                    }
+                                                </a>
                                             </div>
                                         </div>
-                                        @foreach (var item in Model.User.Education.HigherEducations)
-                                        {
-                                            <div class="row">
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <p>Заклад</p>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <p>@item.University</p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <p>Факультет</p>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <p>@item.Faculty</p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <p>Спеціальність</p>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <p>@item.Specialty</p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <p>Статус</p>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <p>@item.Status</p>
-                                                </div>
-                                            </div>
-                                        }
                                     }
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    @if (Model.User.Education.Schools != null)
-                                    {
-                                        <div class="row">
-                                            <div class="col">
-                                                <label>Школа</label>
-                                            </div>
-                                        </div>
-                                        foreach (var item in Model.User.Education.Schools)
-                                        {
-                                            <div class="row">
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <p>Заклад</p>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <p>@item.Name</p>
-                                                </div>
-                                            </div>
-                                            if (item.Description != null)
-                                            {
-                                                <div class="row">
-                                                    <div class="col-md-1">
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <p>Опис</p>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <p>@item.Description</p>
-                                                    </div>
-                                                </div>
-                                            }
-                                        }
-                                    }
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    @if (Model.User.Education.Courses != null)
-                                    {
-                                        <div class="row">
-                                            <div class="col">
-                                                <label>Курси</label>
-                                            </div>
-                                        </div>
-                                        foreach (var item in Model.User.Education.Courses)
-                                        {
-                                            <div class="row">
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <p>Назва</p>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <p>@item.Name</p>
-                                                </div>
-                                            </div>
-                                            @if (item.Description != null)
-                                            {
-                                                <div class="row">
-                                                    <div class="col-md-1">
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <p>Опис</p>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <p>@item.Description</p>
-                                                    </div>
-                                                </div>
-                                            }
-                                        }
-                                    }
+                                }
 
-                                </div>
                             </div>
                         </div>
-                    }
-
-                    @if (Model.User.Skill != null)
-                    {
-                        <div class="tab-pane fade" id="professions" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="row">
-                                <div class="col">
-                                    @if (Model.User.Skill.Jobs != null)
+                    </div>
+                }
+                @if (Model.User.Education != null)
+                {
+                    <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col">
+                                @if (Model.User.Education.HigherEducations.Count != 0)
+                                {
+                                    <div class="row">
+                                        <div class="col">
+                                            <label>Вища освіта</label>
+                                        </div>
+                                    </div>
+                                    @foreach (var item in Model.User.Education.HigherEducations)
                                     {
-                                        int count = 1;
-                                        foreach (var item in Model.User.Skill.Jobs)
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p>Заклад</p>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p>@item.University</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p>Факультет</p>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p>@item.Faculty</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p>Спеціальність</p>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p>@item.Specialty</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p>Статус</p>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p>@item.Status</p>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                @if (Model.User.Education.Schools.Count != 0)
+                                {
+                                    <div class="row">
+                                        <div class="col">
+                                            <label>Школа</label>
+                                        </div>
+                                    </div>
+                                    foreach (var item in Model.User.Education.Schools)
+                                    {
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p>Заклад</p>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p>@item.Name</p>
+                                            </div>
+                                        </div>
+                                        if (item.Description != null)
                                         {
-                                            <div class="row">
-                                                <div class="col">
-                                                    <label>Професія @count</label>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <p>Місце роботи</p>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <p>@item.NameCompany</p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <p>Посада</p>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <p>@item.NamePosition</p>
-                                                </div>
-                                            </div>
                                             <div class="row">
                                                 <div class="col-md-1">
                                                 </div>
@@ -349,129 +281,221 @@
                                                     <p>Опис</p>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <p>@item.DescriptionOfWork</p>
+                                                    <p>@item.Description</p>
                                                 </div>
                                             </div>
-                                            ++count;
                                         }
                                     }
-                                </div>
+                                }
                             </div>
                         </div>
-                    }
-                    @if (Model.User.Contact != null && Model.User.Contact.Address != null)
-                    {
-                        <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="row">
-                                <div class="col">
-                                    @if (Model.User.Contact.Address.Country != null)
+                        <div class="row">
+                            <div class="col">
+                                @if (Model.User.Education.Courses.Count != 0)
+                                {
+                                    <div class="row">
+                                        <div class="col">
+                                            <label>Курси</label>
+                                        </div>
+                                    </div>
+                                    foreach (var item in Model.User.Education.Courses)
                                     {
                                         <div class="row">
-                                            <div class="col-md-4">
-                                                <p>Країна</p>
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p>Назва</p>
                                             </div>
                                             <div class="col-md-8">
-                                                <p>@Model.User.Contact.Address.Country</p>
+                                                <p>@item.Name</p>
                                             </div>
                                         </div>
+                                        @if (item.Description != null)
+                                        {
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <p>Опис</p>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <p>@item.Description</p>
+                                                </div>
+                                            </div>
+                                        }
                                     }
+                                }
 
-                                    @if (Model.User.Contact.Address.Region != null)
-                                    {
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <p>Область</p>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <p>@Model.User.Contact.Address.Region</p>
-                                            </div>
-                                        </div>
-                                    }
-
-                                    @if (Model.User.Contact.Address.City != null)
-                                    {
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <p>Місто</p>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <p>@Model.User.Contact.Address.City</p>
-                                            </div>
-                                        </div>
-                                    }
-
-                                    @if (Model.User.Contact.Address.District != null)
-                                    {
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <p>Район</p>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <p>@Model.User.Contact.Address.District</p>
-                                            </div>
-                                        </div>
-                                    }
-
-                                    @if (Model.User.Contact.Address.Street != null)
-                                    {
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <p>Вулиця</p>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <p>@Model.User.Contact.Address.Street</p>
-                                            </div>
-                                        </div>
-                                    }
-
-                                    @if (Model.User.Contact.Address.NumberOfHouse != null)
-                                    {
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <p>Номер будинку</p>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <p>@Model.User.Contact.Address.NumberOfHouse</p>
-                                            </div>
-                                        </div>
-                                    }
-                                </div>
                             </div>
                         </div>
-                    }
-                </div>
+                    </div>
+                }
+
+                @if (Model.User.Skill != null)
+                {
+                    <div class="tab-pane fade" id="professions" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col">
+                                @if (Model.User.Skill.Jobs.Count != 0)
+                                {
+                                    int count = 1;
+                                    foreach (var item in Model.User.Skill.Jobs)
+                                    {
+                                        <div class="row">
+                                            <div class="col">
+                                                <label>Професія @count</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p>Місце роботи</p>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p>@item.NameCompany</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p>Посада</p>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p>@item.NamePosition</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p>Опис</p>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p>@item.DescriptionOfWork</p>
+                                            </div>
+                                        </div>
+                                        ++count;
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (Model.User.Contact != null && Model.User.Contact.Address != null)
+                {
+                    <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col">
+                                @if (Model.User.Contact.Address.Country != null)
+                                {
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p>Країна</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p>@Model.User.Contact.Address.Country</p>
+                                        </div>
+                                    </div>
+                                }
+
+                                @if (Model.User.Contact.Address.Region != null)
+                                {
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p>Область</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p>@Model.User.Contact.Address.Region</p>
+                                        </div>
+                                    </div>
+                                }
+
+                                @if (Model.User.Contact.Address.City != null)
+                                {
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p>Місто</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p>@Model.User.Contact.Address.City</p>
+                                        </div>
+                                    </div>
+                                }
+
+                                @if (Model.User.Contact.Address.District != null)
+                                {
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p>Район</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p>@Model.User.Contact.Address.District</p>
+                                        </div>
+                                    </div>
+                                }
+
+                                @if (Model.User.Contact.Address.Street != null)
+                                {
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p>Вулиця</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p>@Model.User.Contact.Address.Street</p>
+                                        </div>
+                                    </div>
+                                }
+
+                                @if (Model.User.Contact.Address.NumberOfHouse != null)
+                                {
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p>Номер будинку</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p>@Model.User.Contact.Address.NumberOfHouse</p>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     </div>
+</div>
 
 
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-        <form asp-action="AddFeedback" method="post">
-            <input type="text" hidden="hidden" asp-for="Id"  class="form-control"  />
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Your Feedback</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-5">
-                                <input type="number" asp-for="Note" class="form-control" placeholder="0 - 100" />
-                            </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form asp-action="AddFeedback" method="post">
+        <input type="text" hidden="hidden" asp-for="Id" class="form-control" />
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ваш відгук</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row  align-items-center" style="margin-bottom:20px;">
+                        <label for="inputFaculty" class="col-sm-7 col-form-label">Залиште оццінку від 0 до 100.</label>
+                        <div class="col-sm-5 ml-auto">
+                             <input type="number" asp-for="Note" class="form-control" placeholder="0 - 100" />
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-sm btn-grey" data-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-sm btn-success" value="Save" />
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Закрити</button>
+                    <input type="submit" class="btn btn-sm btn-success" value="Зберегти" />
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
+</div>
