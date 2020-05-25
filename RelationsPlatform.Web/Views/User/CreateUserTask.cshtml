@@ -10,9 +10,9 @@
 
 <div class="container">
     <form class="form-horizontal" role="form" asp-action="CreateUserTask">
-        <h2>Creating</h2>
+        <h2>Створення</h2>
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Subject</label>
+            <label class="col-sm-2 col-form-label">Предмет</label>
             <div class="col-sm-9 ml-auto">
                 <select type="text" asp-for="Subject" class="form-control">
                     @foreach (var item in Model.Subjects)
@@ -36,7 +36,7 @@
         </div>
         <div class="container">
             <div class="row justify-content-center">
-                <button type="submit" class="btn btn-sm btn-primary">Create</button>
+                <button type="submit" class="btn btn-sm btn-primary">Зберегти</button>
             </div>
         </div>
     </form>

@@ -249,7 +249,7 @@ namespace RelationsPlatform.Web.Controllers
             var user = await _userStorage.GetUser(User.Identity.Name);
             var task = new UserTaskArgs()
             {
-                Id = user.Id.ToString(),
+                UserId = user.Id.ToString(),
                 Date = DateTime.Now,
                 LongDescription = model.LongDescription,
                 ShortDescription = model.ShortDescription,
@@ -667,13 +667,13 @@ namespace RelationsPlatform.Web.Controllers
                 note = feedback.Note;
             }
             string raiting;
-            if (user.Feedbacks.Count == 0)
+            if (relationUser.Feedbacks.Count == 0)
             {
                 raiting = "0.0";
             }
             else
             {
-                raiting = (user.Feedbacks.Select(x => x.Note).Sum() / user.Feedbacks.Count / 10.0).ToString();
+                raiting = $"{(relationUser.Feedbacks.Select(x => x.Note).Sum() / relationUser.Feedbacks.Count / 10.0).ToString()}/10";
             }
             var userViewModel = new RelationProfileViewModel()
             {

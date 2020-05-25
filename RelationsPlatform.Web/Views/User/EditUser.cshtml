@@ -5,179 +5,185 @@
     Layout = "~/Views/User/_Menu.cshtml";
 }
 
-<div class="container emp-profile">
-    <div class="row">
-        <div class="col-md-10 ">
-            <form class="form-horizontal" asp-action="EditUser" enctype="multipart/form-data">
-                <fieldset>
-                    <!-- Form Name -->
-                    <legend>User profile form requirement</legend>
-                    <hr />
-                    <div class="form-group row">
-                        <label class="col-md-4 col-form-label text-md-right">Photo</label>
-                        <div class="col-md-4">
-                            <input type='file' asp-for="File" onchange="readURL(this);" />
+<link rel="stylesheet" href="~/css/editProfile.css" />
+
+<form class="form-horizontal" asp-action="EditUser" enctype="multipart/form-data" >
+    <div class="container p-0">
+
+        <h1 class="h3 mb-3">Редагування</h1>
+
+        <div class="row">
+
+            <!--Menu-->
+            <div class="col-md-5 col-xl-4">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Контакти</h5>
+                        <hr />
+                        <div class="form-group">
+                            <label for="inputPasswordCurrent">Discord</label>
+                            <input type="text" asp-for="Discord" class="form-control">
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputName" class="col-md-4 col-form-label text-md-right">Name</label>
-                        <div class="col-md-4">
-                            <input type="text" asp-for="Name" class="form-control" id="inputName" placeholder="Name">
+                        <div class="form-group">
+                            <label for="inputPasswordCurrent">Email</label>
+                            <input type="text" asp-for="Email" class="form-control">
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-4 col-form-label text-md-right">Login</label>
-                        <div class="col-md-4">
-                            <input type="text" asp-for="Login" class="form-control" placeholder="Login">
+                        <div class="form-group">
+                            <label for="inputPasswordCurrent">Facebook</label>
+                            <input type="text" asp-for="Facebook" class="form-control">
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-4 col-form-label text-md-right">Password</label>
-                        <div class="col-md-4">
-                            <input type="text" asp-for="Password" class="form-control" placeholder="Password">
+                        <div class="form-group">
+                            <label for="inputPasswordCurrent">Telegram</label>
+                            <input type="text" asp-for="Telegram" class="form-control">
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-4 col-form-label text-md-right">Digital name</label>
-                        <div class="col-md-4">
-                            <input type="text" asp-for="DigitalName" class="form-control" placeholder="Disgital name">
+                        <div class="form-group">
+                            <label for="inputPasswordCurrent">Instagram</label>
+                            <input type="text" asp-for="Instagram" class="form-control">
                         </div>
+
                     </div>
-                    <div class="form-group row">
-                        <label class="col-md-4 col-form-label text-md-right">Birthday</label>
-                        <div class="col-md-4">
-                            <input type="text" asp-for="Birthday" class="form-control" placeholder="YYYY-MM-DD">
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Адрес</h5>
+                        <hr />
+                        <div class="form-group">
+                            <label for="inputPasswordCurrent">Країна</label>
+                            <input type="text" asp-for="Country" class="form-control">
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-4 col-form-label text-md-right">Main skill</label>
-                        <div class="col-md-4">
-                            <input type="text" asp-for="MainSkill" class="form-control" placeholder="Main skill">
+                        <div class="form-group">
+                            <label for="inputPasswordCurrent">Регіон</label>
+                            <input type="text" asp-for="Region" class="form-control">
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-4 col-form-label text-md-right">Gender</label>
-                        <div class="col-md-4">
-                            @if (@Model.Gender == "Male")
-                            {
-                                <label class="radio-inline" asp-for="Gender">
-                                    <input type="radio" name="Gender" id="Gender-0" value="Male" checked="checked">Male
-                                </label>
-                                <label class="radio-inline" asp-for="Gender">
-                                    <input type="radio" name="Gender" id="Gender-1" value="Female">Female
-                                </label>
-                            }
-                            else
-                            {
-                                <label class="radio-inline" asp-for="Gender">
-                                    <input type="radio" name="Gender" id="Gender-0" value="Male">Male
-                                </label>
-                                <label class="radio-inline" asp-for="Gender">
-                                    <input type="radio" name="Gender" id="Gender-1" value="Female" checked="checked">Female
-                                </label>
-                            }
+                        <div class="form-group">
+                            <label for="inputPasswordCurrent">Місто</label>
+                            <input type="text" asp-for="City" class="form-control">
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-4 col-form-label text-md-right">Overview</label>
-                        <div class="col-md-4">
-                            <textarea class="form-control" rows="7" asp-for="Description">Overview</textarea>
+                        <div class="form-group">
+                            <label for="inputPasswordCurrent">Район</label>
+                            <input type="text" asp-for="District" class="form-control">
                         </div>
-                    </div>
-                    <legend>Contacts</legend>
-                    <hr />
-                    <div class="form-group row">
-                        <label class="col-md-4 col-form-label text-md-right">Instagram</label>
-                        <div class="col-md-4">
-                            <input type="text" asp-for="Instagram" class="form-control" placeholder="Instagram">
+                        <div class="form-group">
+                            <label for="inputPasswordCurrent">Вулиця</label>
+                            <input type="text" asp-for="Street" class="form-control">
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-4 col-form-label text-md-right">Telegram</label>
-                        <div class="col-md-4">
-                            <input type="text" asp-for="Telegram" class="form-control" placeholder="Telegram">
+                        <div class="form-group">
+                            <label for="inputPasswordCurrent">Номер будинку</label>
+                            <input type="text" asp-for="NumberOfHouse" class="form-control">
                         </div>
+
                     </div>
-                    <div class="form-group row">
-                        <label class="col-md-4 col-form-label text-md-right">Facebook</label>
-                        <div class="col-md-4">
-                            <input type="text" asp-for="Facebook" class="form-control" placeholder="Facebook">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-4 col-form-label text-md-right">Email</label>
-                        <div class="col-md-4">
-                            <input type="text" asp-for="Email" class="form-control" placeholder="Email">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-4 col-form-label text-md-right">Discord</label>
-                        <div class="col-md-4">
-                            <input type="text" asp-for="Discord" class="form-control" placeholder="Discord">
-                        </div>
-                    </div>
-                    <legend>Address</legend>
-                    <hr />
-                    <div class="form-group row">
-                        <label class="col-md-4 col-form-label text-md-right">Country</label>
-                        <div class="col-md-4">
-                            <input type="text" asp-for="Country" class="form-control" placeholder="Country">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-4 col-form-label text-md-right">Region</label>
-                        <div class="col-md-4">
-                            <input type="text" asp-for="Region" class="form-control" placeholder="Region">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-4 col-form-label text-md-right">City</label>
-                        <div class="col-md-4">
-                            <input type="text" asp-for="City" class="form-control" placeholder="City">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-4 col-form-label text-md-right">District</label>
-                        <div class="col-md-4">
-                            <input type="text" asp-for="District" class="form-control" placeholder="District">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-4 col-form-label text-md-right">Street</label>
-                        <div class="col-md-4">
-                            <input type="text" asp-for="Street" class="form-control" placeholder="Street">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-4 col-form-label text-md-right">Number of house</label>
-                        <div class="col-md-4">
-                            <input type="text" asp-for="NumberOfHouse" class="form-control" placeholder="Number of house">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-md-4">
-                            <div class="row justify-content-end">
-                                <div class="col-md-4">
-                                    <a asp-action="Profile" class="btn btn-danger">Cancel</a>
+                </div>
+            </div>
+
+            <div class="col-md-7 col-xl-8">
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="account" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-actions float-right">
+                                    <div class="dropdown show">
+                                        <a href="#" data-toggle="dropdown" data-display="static">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal align-middle">
+                                                <circle cx="12" cy="12" r="1"></circle>
+                                                <circle cx="19" cy="12" r="1"></circle>
+                                                <circle cx="5" cy="12" r="1"></circle>
+                                            </svg>
+                                        </a>
+
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
                                 </div>
+                                <h5 class="card-title mb-0">Публічна інформація</h5>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label for="inputUsername">Прізвище ім'я</label>
+                                            <input type="text" asp-for="Name" class="form-control" id="inputUsername" placeholder="Прізвище ім'я">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputUsername">Логін</label>
+                                            <input type="text" asp-for="Login" class="form-control" id="inputUsername" placeholder="Логін">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputUsername">Нік</label>
+                                            <input type="text" asp-for="DigitalName" class="form-control" id="inputUsername" placeholder="Нік">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputUsername">Логін</label>
+                                            <input type="text" asp-for="Birthday" class="form-control" id="inputUsername" placeholder="ДД.ММ.РРРР">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputUsername">Головний навик</label>
+                                            <input type="text" asp-for="MainSkill" class="form-control" id="inputUsername" placeholder="Головний навик">
+                                        </div>
+                                        <div class="form-group">
+                                            @if (@Model.Gender == "Чоловік")
+                                            {
+                                                <label class="radio-inline" asp-for="Gender">
+                                                    <input type="radio" name="Gender" id="Gender-0" value="Male" checked="checked">Чоловік
+                                                </label>
+                                                <label class="radio-inline" asp-for="Gender">
+                                                    <input type="radio" name="Gender" id="Gender-1" value="Female">Жінка
+                                                </label>
+                                            }
+                                            else
+                                            {
+                                                <label class="radio-inline" asp-for="Gender">
+                                                    <input type="radio" name="Gender" id="Gender-0" value="Male">Чоловік
+                                                </label>
+                                                <label class="radio-inline" asp-for="Gender">
+                                                    <input type="radio" name="Gender" id="Gender-1" value="Female" checked="checked">Жінка
+                                                </label>
+                                            }
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputUsername">Biography</label>
+                                            <textarea rows="7" asp-for="Description" class="form-control" id="inputBio" placeholder="Tell something about yourself">Опис</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="text-center">
+                                            <div class="col-md-2 hidden-xs">
+                                                @if (Model.Avatar == null)
+                                                {
+                                                    <img id="blah" alt="your image" src="~/img/ava.png" class="rounded-circle img-responsive mt-2" width="128" height="128">
+                                                }
+                                                else
+                                                {
+                                                    <img id="blah" alt="your image" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Avatar)" class="rounded-circle img-responsive mt-2" width="128" height="128">
+                                                }
+                                            </div>
+
+                                            <div class="mt-2">
+                                                <input type='file' asp-for="File" onchange="readURL(this);" />
+                                            </div>
+                                            <small>Для кращого результату, використовуйте розширення не менше ніж 128px на 128px в .jpg форматі</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="submit"  class="btn btn-primary">Зберегти зміни</button>
+
+
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <button type="submit" class="btn btn-success" value="">save</button>
-                        </div>
+
+
                     </div>
-                </fieldset>
-            </form>
+                </div>
+            </div>
         </div>
-        <div class="col-md-2 hidden-xs">
-            @if (Model.Avatar == null)
-            {
-                <img id="blah" alt="your image" src="~/img/ava.png" class="img-responsive img-thumbnail imgAva">
-            }
-            else
-            {
-                <img id="blah" alt="your image" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Avatar)" class="img-responsive img-thumbnail imgAva">
-            }
-        </div>
+
     </div>
-</div>
+
+</form>

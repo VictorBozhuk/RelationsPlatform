@@ -47,20 +47,14 @@
             <div class="collapse navbar-collapse" id="mainMenu">
                 <ul class="navbar-nav ml-auto navList">
                     <li class="nav-item active"><a asp-controller="Account" asp-action="Index" class="nav-link"><i class="fas fa-home"></i>Головна<span class="sr-only">(current)</span></a></li>
-                    <li class="nav-item">
-                        <a  class="nav-link"><i class="fas fa-cogs"></i>Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a  class="nav-link"><i class="fas fa-briefcase"></i>Portfolio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a  class="nav-link"><i class="fas fa-phone"></i>Contact</a>
-                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
                     <li class="nav-item">
                         <form method="post" asp-controller="Account" asp-action="Logout" style="margin-top:5px;">
                             <i class="fas fa-users"></i><input type="submit" class="transButton" value="Вихід" />
                         </form>
                     </li>
+                    }
                 </ul>
             </div>
         </nav>
@@ -70,7 +64,7 @@
 
     <footer class="border-top footer text-muted" style="background:white;">
         <div class="container">
-            &copy; 2020 - RelationsPlatform
+            &copy; 2020 - StudBro
         </div>
     </footer>
 

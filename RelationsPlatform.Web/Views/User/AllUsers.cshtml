@@ -5,7 +5,6 @@
     Layout = "~/Views/User/_Menu.cshtml";
 }
 
-
 <div class="container well" id="toggle">
     <div class="row">
         <form method="get">
@@ -122,12 +121,12 @@
                                         <p>Місто</p>
                                     </div>
                                     <div class="col-md-9">
-                                        @if(user.Skill != null)
+                                        @if (user.Skill != null)
                                         {
                                             <p>@user.Skill.MainProfession</p>
                                         }
                                         <p>@user.Birthday.GetValueOrDefault().ToShortDateString()</p>
-                                        @if(user.Contact != null && user.Contact.Address != null)
+                                        @if (user.Contact != null && user.Contact.Address != null)
                                         {
                                             <p>@user.Contact.Address.City</p>
                                         }
