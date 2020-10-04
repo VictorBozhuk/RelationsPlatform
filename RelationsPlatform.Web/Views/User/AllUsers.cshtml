@@ -5,19 +5,113 @@
     Layout = "~/Views/User/_Menu.cshtml";
 }
 
-<div class="container well" id="toggle">
+<link rel="stylesheet" href="~/css/ProfileNew.css" />
+
+
+<div class="container-fluid gedf-wrapper">
     <div class="row">
-        <form method="get">
-            <div class="slide-wrapper">
-                <div class="row">
-                    <div class="col-md-3">
+        <div class="col-md-9">
+            <form method="post">
+                @foreach (var user in Model.Users)
+                {
+
+                    <div class="card gedf-card">
+                        <div class="card-body">
+                            <div class="relationRow">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="row">
+                                            @if (user.Avatar == null)
+                                            {
+                                                <img src="~/img/ProfileIcon.png" a">
+                                            }
+                                            else
+                                            {
+                                                <img alt="your image" src="data:image/jpeg;base64,@Convert.ToBase64String(user.Avatar)">
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                        <h4>@user.Name</h4>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <a id="buttonListProfile" asp-action="RelationProfile" asp-route-id="@user.Id" class="btn btn-primary btn-sm">Профіль</a>
+                                                    </div>
+                                                </div>
+                                                <hr />
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <p>Професія</p>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                @if (user.Skill != null && @user.Skill.MainProfession != null)
+                                                                {
+                                                                    <p>@user.Skill.MainProfession</p>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <p>Інформація відсутня</p>
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <p>День народження</p>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                @if (user.Birthday != null)
+                                                                {
+                                                                    <p>@user.Birthday.GetValueOrDefault().ToShortDateString()</p>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <p>Інформація відсутня</p>
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <p>Місто</p>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                @if (user.Contact != null && user.Contact.Address != null)
+                                                                {
+                                                                    <p>@user.Contact.Address.City</p>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <p>Інформація відсутня</p>
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </form>
+        </div>
+
+        <div class="col-md-3 gedf-main">
+            <form method="get">
+                <div class="card gedf-card">
+                    <div class="card-body">
                         <div class="form-group has-feedback has-clear">
                             <label id="filter" for="exampleInputEmail1">Ім'я</label>
                             <input asp-for="Name" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="Ім'я">
                             <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
                         </div>
-                    </div>
-                    <div class="col-md-3">
                         <div class="form-group has-feedback has-clear">
                             <label id="filter" for="exampleInputEmail1">Стать</label>
                             <select class="form-control no-rounded" type="text" id="inputChoiseLecturer" asp-for="Gender">
@@ -27,116 +121,45 @@
                             </select>
                             <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
                         </div>
-                    </div>
-                    <div class="col-md-3">
                         <div class="form-group has-feedback has-clear">
                             <label id="filter" for="exampleInputEmail1">Місто</label>
                             <input asp-for="City" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="Місто">
                             <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
                         </div>
-                    </div>
-                    <div class="col-md-3">
                         <div class="form-group has-feedback has-clear">
                             <label id="filter" for="exampleInputEmail1">Професійний навик</label>
                             <input asp-for="ProfrssionSkill" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="Професійний навик">
                             <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
                         </div>
-                    </div>
-                    <div class="col-md-3">
                         <div class="form-group has-feedback has-clear">
                             <label id="filter" for="exampleInputEmail1">Здібність</label>
                             <input asp-for="Ability" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="Здібність">
                             <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
                         </div>
-                    </div>
-                    <div class="col-md-3">
                         <div class="form-group has-feedback has-clear">
                             <label id="filter" for="exampleInputEmail1">Професія</label>
                             <input asp-for="Job" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="Професія">
                             <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
                         </div>
-                    </div>
-                    <div class="col-md-3">
                         <div class="form-group has-feedback has-clear">
                             <label id="filter" for="exampleInputEmail1">Навчальний заклад</label>
                             <input asp-for="University" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="Навчальний заклад">
                             <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
                         </div>
-                    </div>
-                    <div class="col-md-3">
                         <div class="form-group has-feedback has-clear">
                             <label id="filter" for="exampleInputEmail1">Факультет</label>
                             <input asp-for="Faculty" type="text" class="form-control no-rounded" id="exampleInput1" placeholder="Факультет">
                             <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
                         </div>
+                        <div class="col-md-12">
+                            <button id="filter" type="submit" class="btn btn-secondary pull-right">Пошук</button>
+                        </div>
+
+
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <button id="filter" type="submit" class="btn btn-secondary pull-right">Пошук</button>
-                    </div>
-                </div>
-            </div>
-        </form>
+            </form>
+
+        </div>
     </div>
-</div>
-
-
-
-
-<div class="container emp-profile">
-    <form method="post">
-        @foreach (var user in Model.Users)
-        {
-            <div class="relationRow">
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="row">
-                            @if (user.Avatar == null)
-                            {
-                                <img src="~/img/ava.png" a">
-                            }
-                            else
-                            {
-                                <img alt="your image" src="data:image/jpeg;base64,@Convert.ToBase64String(user.Avatar)">
-                            }
-                        </div>
-                    </div>
-                    <div class="col-md-10">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        <h4>@user.Name</h4>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <a id="buttonListProfile" asp-action="RelationProfile" asp-route-id="@user.Id" class="btn btn-primary btn-sm">Профіль</a>
-                                    </div>
-                                </div>
-                                <hr />
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <p>Професія</p>
-                                        <p>День народження</p>
-                                        <p>Місто</p>
-                                    </div>
-                                    <div class="col-md-9">
-                                        @if (user.Skill != null)
-                                        {
-                                            <p>@user.Skill.MainProfession</p>
-                                        }
-                                        <p>@user.Birthday.GetValueOrDefault().ToShortDateString()</p>
-                                        @if (user.Contact != null && user.Contact.Address != null)
-                                        {
-                                            <p>@user.Contact.Address.City</p>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!--profile-head close-->
-                </div>
-            </div>
-        }
-    </form>
 </div>

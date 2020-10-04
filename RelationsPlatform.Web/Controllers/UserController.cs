@@ -167,19 +167,20 @@ namespace RelationsPlatform.Web.Controllers
             };
             await _schoolStorage.AddSchool(school);
 
-            return RedirectToAction("Courses");
+            return RedirectToAction("Schools");
         }
 
         public async Task<IActionResult> AllUsers(AllUsersViewModel model)
         {
-            var users = await _userStorage.GetUsers();
+            var userMe = await _userStorage.GetUser(User.Identity.Name);
+            var users = (await _userStorage.GetUsers()).Where(x => x != userMe).ToList();
 
             if (!string.IsNullOrEmpty(model.Name))
             {
                 users = users.Intersect(users.Where(p => p.Name.ToLower().Contains(model.Name.ToLower()))).ToList();
             }
 
-            if (model.Gender != null && model.Gender != "Everything")
+            if (model.Gender != null && model.Gender != "Всі")
             {
                 users = users.Intersect(users.Where(p => p.Gender == model.Gender)).ToList();
             }

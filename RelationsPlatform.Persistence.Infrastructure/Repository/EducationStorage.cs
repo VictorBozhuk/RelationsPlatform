@@ -16,6 +16,11 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
             _context = context;
         }
 
+        public async Task Create(string userId)
+        {
+            _context.Educations.Add(new Education() { UserId = Guid.Parse(userId) });
+            await _context.SaveChangesAsync();
+        }
         public async Task<Education> GetEducation(string userid)
         {
             return await _context.Educations.FirstOrDefaultAsync(x => x.UserId.ToString() == userid);

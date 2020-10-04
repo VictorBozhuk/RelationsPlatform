@@ -5,26 +5,66 @@
     Layout = "~/Views/User/_Menu.cshtml";
 }
 
+<link rel="stylesheet" href="~/css/ProfileNew.css" />
+
 <div class="container emp-profile">
-    <form method="post">
-        @foreach (var item in Model.Tasks)
-        {
-        <div class="relationRow">
-            <div class="row">
-                <div class="col-md-10">
-                    <h4>@item.Subject</h4>
-                </div>
-                <div class="col-md-2">
-                    <a id="buttonListProfile" asp-action="UserTask" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Переглянути</a>
-                </div>
-            </div>
-            <hr />
-            <div class="row">
-                <div class="col-md-12">
-                    <p style="margin-left:50px;">@item.ShortDescription</p>
-                </div>
-            </div>
+    <div class="row">
+        <div class="col-md-9">
+            <form method="post">
+                @foreach (var item in Model.Tasks)
+                {
+                    <div class="card gedf-card">
+                        <div class="card-body">
+                            <div class="relationRow">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <h4>@item.Subject</h4>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a id="buttonListProfile" asp-action="UserTask" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Переглянути</a>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p style="margin-left:50px;">@item.ShortDescription</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </form>
         </div>
-        }
-    </form>
+
+
+
+
+        <div class="col-md-3 gedf-main">
+            <form method="get">
+                <div class="card gedf-card">
+                    <div class="card-body">
+                        <div class="form-group has-feedback has-clear">
+                            <label id="filter" for="exampleInputEmail1">Назва</label>
+                            <input  type="text" class="form-control no-rounded" id="exampleInput1" placeholder="Назва">
+                            <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
+                        </div>
+
+                        <div class="form-group has-feedback has-clear">
+                            <label id="filter" for="exampleInputEmail1">Предмет</label>
+                            <input type="text" class="form-control no-rounded" id="exampleInput1" placeholder="Предмет">
+                            <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback hidden"></span>
+                        </div>
+                        <div class="col-md-12">
+                            <button id="filter" type="submit" class="btn btn-secondary pull-right">Пошук</button>
+                        </div>
+
+
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
 </div>

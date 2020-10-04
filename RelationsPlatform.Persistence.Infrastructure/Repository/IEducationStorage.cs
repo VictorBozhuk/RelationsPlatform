@@ -10,6 +10,7 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
     public interface IEducationStorage
     {
         Task<Education> GetEducation(string userid);
+        Task Create(string userId);
     }
 
     public class EducationArgs

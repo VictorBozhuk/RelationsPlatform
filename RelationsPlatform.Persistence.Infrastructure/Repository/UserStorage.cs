@@ -183,13 +183,26 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
             }
 
             var user = await GetUser(args.Login);
+            DateTime? birthday = null;
 
-            if(user != null)
+            if(args.Birthday != "")
+            {
+                try
+                {
+                    birthday = Convert.ToDateTime(args.Birthday);
+                }
+                catch(Exception)
+                {
+                    args.Birthday = null;
+                }
+            }
+
+            if (user != null)
             {
                 user.Login = args.Login;
                 user.Name = args.Name;
                 user.Password = args.Password;
-                user.Birthday = Convert.ToDateTime(args.Birthday);
+                user.Birthday = birthday;
                 user.Description = args.Description;
                 user.DigitalName = args.DigitalName;
                 user.Gender = args.Gender;
@@ -213,6 +226,7 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
                                 address.Country = args.Contact.Address.Country;
                                 address.Region = args.Contact.Address.Region;
                                 address.City = args.Contact.Address.City;
+                                address.District = args.Contact.Address.District;
                                 address.Street = args.Contact.Address.Street;
                                 address.NumberOfHouse = args.Contact.Address.NumberOfHouse;
                             }

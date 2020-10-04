@@ -1,0 +1,76 @@
+﻿body {
+    background-color: #eeeeee;
+}
+
+.h7 {
+    font-size: 0.8rem;
+}
+
+.tab-title {
+    color: #495057;
+    font-size: 16px;
+    font-weight: 600;
+}
+.gedf-wrapper {
+    margin-top: 0.97rem;
+}
+
+@media (min-width: 992px) {
+    .gedf-main {
+        padding-left: 0rem;
+        padding-right: 0rem;
+    }
+
+    .gedf-card {
+        margin-bottom: 1rem;
+    }
+}
+
+/**Reset Bootstrap*/
+.dropdown-toggle::after {
+    content: none;
+}
+
+#editMainData {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+#myTabContent {
+    padding: 2rem;
+}
+
+#allfriends {
+    width:30px;
+    background:Green;
+}
+
+#addToFriend {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+
+
+.main-data {
+    font-size: 16px;
+    color: #818182;
+    margin-top: 1%;
+}
+
+    .main-data span {
+        color: #495057;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+.links {
+    font-size: 14px;
+    color: #818182;
+}
+
+    .links span {
+        color: cornflowerblue;
+        font-size: 16px;
+        font-weight: 600;
+    }

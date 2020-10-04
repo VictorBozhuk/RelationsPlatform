@@ -12,6 +12,7 @@ namespace RelationsPlatform.Persistence.Infrastructure.Repository
     {
         Task<Skill> GetSkill(string userId);
         Task EditSkill(string userId, string mainSkill);
+        Task Create(string userId);
     }
 
     public class SkillArgs

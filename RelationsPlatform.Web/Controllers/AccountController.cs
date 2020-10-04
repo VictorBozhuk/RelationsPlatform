@@ -21,11 +21,15 @@ namespace RelationsPlatform.Web.Controllers
     {
         private readonly IAccountStorage _accountStorage;
         private readonly IUserStorage _userStorage;
+        private readonly ISkillStorage _skillStorage;
+        private readonly IEducationStorage _educationStorage;
 
-        public AccountController(IAccountStorage accountStorage, IUserStorage userStorage)
+        public AccountController(IAccountStorage accountStorage, IUserStorage userStorage, ISkillStorage skillStorage, IEducationStorage educationStorage)
         {
             _userStorage = userStorage;
             _accountStorage = accountStorage;
+            _skillStorage = skillStorage;
+            _educationStorage = educationStorage;
         }
 
         public IActionResult Index(string returnUrl = null)
@@ -94,7 +98,9 @@ namespace RelationsPlatform.Web.Controllers
 
                         await _userStorage.CreateUser(userArgs);
                         var createdUser = await _userStorage.GetUser(model.Login);
-                        await this.Authenticate(createdUser);
+                        await _skillStorage.Create(createdUser.Id.ToString());
+                        await _educationStorage.Create(createdUser.Id.ToString());
+                        await this.Authenticate(createdUser);                        
                         return this.RedirectToAction("Profile", "User");
                     }
                     else
